@@ -1,0 +1,22 @@
+### Footprint positions - created on 2026-04-16T14:59:01+0200 ###
+### Printed by KiCad version 9.0.8-9.0.8~ubuntu22.04.1
+## Unit = mm, Angle = deg.
+## Side : top
+# Ref          Val       Package                PosX       PosY       Rot  Side
+                                            -45.7200    22.3620    0.0000  top
+                                            -45.7200    -7.6380    0.0000  top
+                                            -15.7200    -7.6380    0.0000  top
+                                            -15.7200    22.3620    0.0000  top
+IMX1           IMX647    IMX647             -50.0000    31.0000  180.0000  top
+IMX1           IMX647    IMX647             -50.0000     1.0000  180.0000  top
+IMX1           IMX647    IMX647             -20.0000     1.0000  180.0000  top
+IMX1           IMX647    IMX647             -20.0000    31.0000  180.0000  top
+KiKit_FID_T_1  Fiducial  Fiducial           -70.0000    32.0000    0.0000  top
+KiKit_FID_T_2  Fiducial  Fiducial             0.0000    32.0000    0.0000  top
+KiKit_FID_T_3  Fiducial  Fiducial           -70.0000     0.0000    0.0000  top
+KiKit_FID_T_4  Fiducial  Fiducial             0.0000     0.0000    0.0000  top
+KiKit_TO_1     NPTH      NPTH               -70.0000    51.0000    0.0000  top
+KiKit_TO_2     NPTH      NPTH                 0.0000    51.0000    0.0000  top
+KiKit_TO_3     NPTH      NPTH               -70.0000   -19.0000    0.0000  top
+KiKit_TO_4     NPTH      NPTH                 0.0000   -19.0000    0.0000  top
+## End

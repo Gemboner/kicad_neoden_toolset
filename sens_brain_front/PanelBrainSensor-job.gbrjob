@@ -1,0 +1,206 @@
+{
+  "Header": {
+    "GenerationSoftware": {
+      "Vendor": "KiCad",
+      "Application": "Pcbnew",
+      "Version": "9.0.6-9.0.6~ubuntu22.04.1"
+    },
+    "CreationDate": "2026-03-20T15:24:08+01:00"
+  },
+  "GeneralSpecs": {
+    "ProjectId": {
+      "Name": "PanelBrainSensor",
+      "GUID": "50616e65-6c42-4726-9169-6e53656e736f",
+      "Revision": "rev?"
+    },
+    "Size": {
+      "X": 100.15,
+      "Y": 88.17
+    },
+    "LayerNumber": 6,
+    "BoardThickness": 1.5584,
+    "Finish": "ENIG"
+  },
+  "DesignRules": [
+    {
+      "Layers": "Outer",
+      "PadToPad": 0.12,
+      "PadToTrack": 0.12,
+      "TrackToTrack": 0.12,
+      "MinLineWidth": 0.1059,
+      "TrackToRegion": 0.12,
+      "RegionToRegion": 0.12
+    },
+    {
+      "Layers": "Inner",
+      "PadToPad": 0.12,
+      "PadToTrack": 0.12,
+      "TrackToTrack": 0.12,
+      "MinLineWidth": 0.12,
+      "TrackToRegion": 0.12,
+      "RegionToRegion": 0.12
+    }
+  ],
+  "FilesAttributes": [
+    {
+      "Path": "PanelBrainSensor-TOP.gbr",
+      "FileFunction": "Copper,L1,Top",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "PanelBrainSensor-GND.gbr",
+      "FileFunction": "Copper,L2,Inr",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "PanelBrainSensor-PWR.gbr",
+      "FileFunction": "Copper,L3,Inr",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "PanelBrainSensor-INT-SIG.gbr",
+      "FileFunction": "Copper,L4,Inr",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "PanelBrainSensor-GND2.gbr",
+      "FileFunction": "Copper,L5,Inr",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "PanelBrainSensor-BOT.gbr",
+      "FileFunction": "Copper,L6,Bot",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "PanelBrainSensor-F_Paste.gbr",
+      "FileFunction": "SolderPaste,Top",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "PanelBrainSensor-B_Paste.gbr",
+      "FileFunction": "SolderPaste,Bot",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "PanelBrainSensor-F_Silkscreen.gbr",
+      "FileFunction": "Legend,Top",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "PanelBrainSensor-B_Silkscreen.gbr",
+      "FileFunction": "Legend,Bot",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "PanelBrainSensor-F_Mask.gbr",
+      "FileFunction": "SolderMask,Top",
+      "FilePolarity": "Negative"
+    },
+    {
+      "Path": "PanelBrainSensor-B_Mask.gbr",
+      "FileFunction": "SolderMask,Bot",
+      "FilePolarity": "Negative"
+    },
+    {
+      "Path": "PanelBrainSensor-Edge_Cuts.gbr",
+      "FileFunction": "Profile",
+      "FilePolarity": "Positive"
+    }
+  ],
+  "MaterialStackup": [
+    {
+      "Type": "Legend",
+      "Name": "Top Silk Screen"
+    },
+    {
+      "Type": "SolderPaste",
+      "Name": "Top Solder Paste"
+    },
+    {
+      "Type": "SolderMask",
+      "Color": "Black",
+      "Thickness": 0.01,
+      "Name": "Top Solder Mask"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.035,
+      "Name": "TOP"
+    },
+    {
+      "Type": "Dielectric",
+      "Thickness": 0.0994,
+      "Material": "3313 RC57% 4.2mil",
+      "Name": "TOP/GND",
+      "Notes": "Type: dielectric layer 1 (from TOP to GND)"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.0152,
+      "Name": "GND"
+    },
+    {
+      "Type": "Dielectric",
+      "Thickness": 0.55,
+      "Material": "0.25mm H/HOZ without copper",
+      "Name": "GND/PWR",
+      "Notes": "Type: dielectric layer 2 (from GND to PWR)"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.0152,
+      "Name": "PWR"
+    },
+    {
+      "Type": "Dielectric",
+      "Thickness": 0.1088,
+      "Material": "7628, RC 49%, 8.6 mil",
+      "Name": "PWR/INT-SIG",
+      "Notes": "Type: dielectric layer 3 (from PWR to INT-SIG)"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.0152,
+      "Name": "INT-SIG"
+    },
+    {
+      "Type": "Dielectric",
+      "Thickness": 0.55,
+      "Material": "0.25mm H/HOZ without copper",
+      "Name": "INT-SIG/GND2",
+      "Notes": "Type: dielectric layer 4 (from INT-SIG to GND2)"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.0152,
+      "Name": "GND2"
+    },
+    {
+      "Type": "Dielectric",
+      "Thickness": 0.0994,
+      "Material": "3313 RC57% 4.2mil",
+      "Name": "GND2/BOT",
+      "Notes": "Type: dielectric layer 5 (from GND2 to BOT)"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.035,
+      "Name": "BOT"
+    },
+    {
+      "Type": "SolderMask",
+      "Color": "Black",
+      "Thickness": 0.01,
+      "Name": "Bottom Solder Mask"
+    },
+    {
+      "Type": "SolderPaste",
+      "Name": "Bottom Solder Paste"
+    },
+    {
+      "Type": "Legend",
+      "Name": "Bottom Silk Screen"
+    }
+  ]
+}

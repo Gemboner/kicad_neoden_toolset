@@ -1,0 +1,858 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1000" viewBox="0 0 1400 1000">
+<rect width="100%" height="100%" fill="#fbfcfe" />
+<rect x="50" y="76" width="1300" height="874" fill="#ffffff" stroke="#cfd7e3" stroke-width="1.2" />
+<text x="50" y="28" font-size="20" font-family="monospace" fill="#111827">KiCad POS Preview</text>
+<text x="50" y="48" font-size="12" font-family="monospace" fill="#3f4956">source: bridge_intf_front/PanelBridgeInterface-top.pos</text>
+<text x="50" y="64" font-size="12" font-family="monospace" fill="#3f4956">anchor: REF** at (0.0000, 0.0000) mm | output: bridge_intf_front/PanelBridgeInterface-top_preview.svg</text>
+<line x1="88.85" y1="76.00" x2="88.85" y2="950.00" stroke="#e7ecf3" stroke-width="1" />
+<line x1="197.67" y1="76.00" x2="197.67" y2="950.00" stroke="#e7ecf3" stroke-width="1" />
+<line x1="306.49" y1="76.00" x2="306.49" y2="950.00" stroke="#e7ecf3" stroke-width="1" />
+<line x1="415.31" y1="76.00" x2="415.31" y2="950.00" stroke="#e7ecf3" stroke-width="1" />
+<line x1="524.14" y1="76.00" x2="524.14" y2="950.00" stroke="#e7ecf3" stroke-width="1" />
+<line x1="632.96" y1="76.00" x2="632.96" y2="950.00" stroke="#e7ecf3" stroke-width="1" />
+<line x1="741.78" y1="76.00" x2="741.78" y2="950.00" stroke="#e7ecf3" stroke-width="1" />
+<line x1="850.60" y1="76.00" x2="850.60" y2="950.00" stroke="#e7ecf3" stroke-width="1" />
+<line x1="959.42" y1="76.00" x2="959.42" y2="950.00" stroke="#e7ecf3" stroke-width="1" />
+<line x1="1068.24" y1="76.00" x2="1068.24" y2="950.00" stroke="#e7ecf3" stroke-width="1" />
+<line x1="50.00" y1="944.56" x2="1350.00" y2="944.56" stroke="#e7ecf3" stroke-width="1" />
+<line x1="50.00" y1="835.74" x2="1350.00" y2="835.74" stroke="#e7ecf3" stroke-width="1" />
+<line x1="50.00" y1="726.92" x2="1350.00" y2="726.92" stroke="#e7ecf3" stroke-width="1" />
+<line x1="50.00" y1="618.09" x2="1350.00" y2="618.09" stroke="#e7ecf3" stroke-width="1" />
+<line x1="50.00" y1="509.27" x2="1350.00" y2="509.27" stroke="#e7ecf3" stroke-width="1" />
+<line x1="50.00" y1="400.45" x2="1350.00" y2="400.45" stroke="#e7ecf3" stroke-width="1" />
+<line x1="50.00" y1="291.63" x2="1350.00" y2="291.63" stroke="#e7ecf3" stroke-width="1" />
+<line x1="50.00" y1="182.81" x2="1350.00" y2="182.81" stroke="#e7ecf3" stroke-width="1" />
+<line x1="197.67" y1="76.00" x2="197.67" y2="950.00" stroke="#0f1720" stroke-width="1.6" />
+<line x1="50.00" y1="944.56" x2="1350.00" y2="944.56" stroke="#0f1720" stroke-width="1.6" />
+<circle cx="197.67" cy="944.56" r="4.5" fill="#ffffff" stroke="#0f1720" stroke-width="1.4" />
+<g><title>REF** | Fiducial_1mm_Mask2mm | Fiducial_1mm_Mask2mm | (0.0000, 0.0000) mm | 180.0 deg</title><circle cx="197.67" cy="944.56" r="4.00" fill="#ffffff" stroke="#111111" stroke-width="1.6" />
+<circle cx="197.67" cy="944.56" r="2.00" fill="#111111" opacity="0.95" /></g>
+<g><title>C4 | 100nF | C_0402_1005Metric | (22.5300, 53.7600) mm | -90.0 deg</title><rect x="441.35" y="358.03" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 442.85 359.53)" />
+<line x1="442.85" y1="359.53" x2="442.85" y2="365.53"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="442.85" cy="359.53" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C4 | 100nF | C_0402_1005Metric | (65.0700, 53.7600) mm | -90.0 deg</title><rect x="904.27" y="358.03" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 905.77 359.53)" />
+<line x1="905.77" y1="359.53" x2="905.77" y2="365.53"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="905.77" cy="359.53" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C7 | 100nF | C_0402_1005Metric | (2.7350, 64.8900) mm | 90.0 deg</title><rect x="225.93" y="236.92" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 227.43 238.42)" />
+<line x1="227.43" y1="238.42" x2="227.43" y2="232.42"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="227.43" cy="238.42" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C7 | 10uF | C_0603_1608Metric | (34.3700, 22.9750) mm | 90.0 deg</title><rect x="569.51" y="693.04" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 571.69 694.54)" />
+<line x1="571.69" y1="694.54" x2="571.69" y2="688.54"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="571.69" cy="694.54" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C7 | 10uF | C_0603_1608Metric | (-8.1700, 22.9800) mm | 90.0 deg</title><rect x="106.59" y="692.99" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 108.76 694.49)" />
+<line x1="108.76" y1="694.49" x2="108.76" y2="688.49"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="108.76" cy="694.49" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C7 | 100nF | C_0402_1005Metric | (45.2750, 64.8900) mm | 90.0 deg</title><rect x="688.86" y="236.92" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 690.36 238.42)" />
+<line x1="690.36" y1="238.42" x2="690.36" y2="232.42"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="690.36" cy="238.42" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C10 | 1uF | C_0402_1005Metric | (3.6750, 64.8900) mm | 90.0 deg</title><rect x="236.16" y="236.92" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 237.66 238.42)" />
+<line x1="237.66" y1="238.42" x2="237.66" y2="232.42"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="237.66" cy="238.42" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C10 | 1uF | C_0402_1005Metric | (46.2150, 64.8900) mm | 90.0 deg</title><rect x="699.09" y="236.92" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 700.59 238.42)" />
+<line x1="700.59" y1="238.42" x2="700.59" y2="232.42"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="700.59" cy="238.42" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C10 | 4.7uF | C_0603_1608Metric | (39.9150, 22.4800) mm | 180.0 deg</title><rect x="629.86" y="698.43" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 632.03 699.93)" />
+<line x1="632.03" y1="699.93" x2="626.03" y2="699.93"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="632.03" cy="699.93" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C10 | 4.7uF | C_0603_1608Metric | (-2.6250, 22.4850) mm | 180.0 deg</title><rect x="166.93" y="698.37" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 169.11 699.87)" />
+<line x1="169.11" y1="699.87" x2="163.11" y2="699.87"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="169.11" cy="699.87" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C14 | 100nF | C_0402_1005Metric | (67.5491, 62.0471) mm | 0.0 deg</title><rect x="931.25" y="267.85" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 932.75 269.35)" />
+<line x1="932.75" y1="269.35" x2="938.75" y2="269.35"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="932.75" cy="269.35" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C14 | 100nF | C_0402_1005Metric | (25.0091, 62.0471) mm | 0.0 deg</title><rect x="468.32" y="267.85" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 469.82 269.35)" />
+<line x1="469.82" y1="269.35" x2="475.82" y2="269.35"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="469.82" cy="269.35" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C16 | 1uF | C_0402_1005Metric | (17.5650, 52.6900) mm | 180.0 deg</title><rect x="387.32" y="369.68" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 388.82 371.18)" />
+<line x1="388.82" y1="371.18" x2="382.82" y2="371.18"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="388.82" cy="371.18" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C16 | 1uF | C_0402_1005Metric | (60.1050, 52.6900) mm | 180.0 deg</title><rect x="850.24" y="369.68" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 851.74 371.18)" />
+<line x1="851.74" y1="371.18" x2="845.74" y2="371.18"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="851.74" cy="371.18" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C17 | 1uF | C_0402_1005Metric | (17.5650, 53.6100) mm | 180.0 deg</title><rect x="387.32" y="359.67" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 388.82 361.17)" />
+<line x1="388.82" y1="361.17" x2="382.82" y2="361.17"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="388.82" cy="361.17" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C17 | 1uF | C_0402_1005Metric | (60.1050, 53.6100) mm | 180.0 deg</title><rect x="850.24" y="359.67" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 851.74 361.17)" />
+<line x1="851.74" y1="361.17" x2="845.74" y2="361.17"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="851.74" cy="361.17" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C32 | 100n | C_0402_1005Metric | (56.2550, 44.9900) mm | 180.0 deg</title><rect x="808.35" y="453.47" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 809.85 454.97)" />
+<line x1="809.85" y1="454.97" x2="803.85" y2="454.97"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="809.85" cy="454.97" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C32 | 100n | C_0402_1005Metric | (13.7150, 44.9900) mm | 180.0 deg</title><rect x="345.42" y="453.47" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 346.92 454.97)" />
+<line x1="346.92" y1="454.97" x2="340.92" y2="454.97"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="346.92" cy="454.97" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C34 | 10uF | C_0603_1608Metric | (-6.7150, 22.9800) mm | 90.0 deg</title><rect x="122.42" y="692.99" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 124.60 694.49)" />
+<line x1="124.60" y1="694.49" x2="124.60" y2="688.49"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="124.60" cy="694.49" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C34 | 10uF | C_0603_1608Metric | (35.8250, 22.9750) mm | 90.0 deg</title><rect x="585.35" y="693.04" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 587.52 694.54)" />
+<line x1="587.52" y1="694.54" x2="587.52" y2="688.54"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="587.52" cy="694.54" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C41 | 10uF | C_0603_1608Metric | (37.2800, 22.9750) mm | 90.0 deg</title><rect x="601.18" y="693.04" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 603.36 694.54)" />
+<line x1="603.36" y1="694.54" x2="603.36" y2="688.54"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="603.36" cy="694.54" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C41 | 10uF | C_0603_1608Metric | (-5.2600, 22.9800) mm | 90.0 deg</title><rect x="138.25" y="692.99" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 140.43 694.49)" />
+<line x1="140.43" y1="694.49" x2="140.43" y2="688.49"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="140.43" cy="694.49" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C42 | 120pF | C_0402_1005Metric | (37.8250, 26.9610) mm | 0.0 deg</title><rect x="607.79" y="649.67" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 609.29 651.17)" />
+<line x1="609.29" y1="651.17" x2="615.29" y2="651.17"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="609.29" cy="651.17" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C42 | 120pF | C_0402_1005Metric | (-4.7150, 26.9660) mm | 0.0 deg</title><rect x="144.86" y="649.61" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 146.36 651.11)" />
+<line x1="146.36" y1="651.11" x2="152.36" y2="651.11"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="146.36" cy="651.11" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C43 | 4.7uF | C_0603_1608Metric | (39.5950, 70.6000) mm | -90.0 deg</title><rect x="626.37" y="174.78" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 628.55 176.28)" />
+<line x1="628.55" y1="176.28" x2="628.55" y2="182.28"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="628.55" cy="176.28" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C43 | 4.7uF | C_0603_1608Metric | (-2.9450, 70.6000) mm | -90.0 deg</title><rect x="163.45" y="174.78" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 165.62 176.28)" />
+<line x1="165.62" y1="176.28" x2="165.62" y2="182.28"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="165.62" cy="176.28" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C44 | 10uF | C_0603_1608Metric | (39.1000, 65.0550) mm | 180.0 deg</title><rect x="620.99" y="235.12" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 623.16 236.62)" />
+<line x1="623.16" y1="236.62" x2="617.16" y2="236.62"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="623.16" cy="236.62" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C44 | 10uF | C_0603_1608Metric | (-3.4400, 65.0550) mm | 180.0 deg</title><rect x="158.06" y="235.12" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 160.24 236.62)" />
+<line x1="160.24" y1="236.62" x2="154.24" y2="236.62"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="160.24" cy="236.62" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C45 | 10uF | C_0603_1608Metric | (39.1000, 66.5100) mm | 180.0 deg</title><rect x="620.99" y="219.29" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 623.16 220.79)" />
+<line x1="623.16" y1="220.79" x2="617.16" y2="220.79"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="623.16" cy="220.79" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C45 | 10uF | C_0603_1608Metric | (-3.4400, 66.5100) mm | 180.0 deg</title><rect x="158.06" y="219.29" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 160.24 220.79)" />
+<line x1="160.24" y1="220.79" x2="154.24" y2="220.79"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="160.24" cy="220.79" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C46 | 10uF | C_0603_1608Metric | (-3.4400, 67.9650) mm | 180.0 deg</title><rect x="158.06" y="203.45" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 160.24 204.95)" />
+<line x1="160.24" y1="204.95" x2="154.24" y2="204.95"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="160.24" cy="204.95" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C46 | 10uF | C_0603_1608Metric | (39.1000, 67.9650) mm | 180.0 deg</title><rect x="620.99" y="203.45" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 623.16 204.95)" />
+<line x1="623.16" y1="204.95" x2="617.16" y2="204.95"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="623.16" cy="204.95" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C47 | 120pF | C_0402_1005Metric | (35.1150, 68.5100) mm | -90.0 deg</title><rect x="578.30" y="197.52" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 579.80 199.02)" />
+<line x1="579.80" y1="199.02" x2="579.80" y2="205.02"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="579.80" cy="199.02" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C47 | 120pF | C_0402_1005Metric | (-7.4250, 68.5100) mm | -90.0 deg</title><rect x="115.37" y="197.52" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 116.87 199.02)" />
+<line x1="116.87" y1="199.02" x2="116.87" y2="205.02"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="116.87" cy="199.02" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C48 | 4.7uF | C_0603_1608Metric | (69.0050, 68.6400) mm | 180.0 deg</title><rect x="946.42" y="196.11" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 948.59 197.61)" />
+<line x1="948.59" y1="197.61" x2="942.59" y2="197.61"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="948.59" cy="197.61" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C48 | 4.7uF | C_0603_1608Metric | (26.4650, 68.6400) mm | 180.0 deg</title><rect x="483.49" y="196.11" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 485.67 197.61)" />
+<line x1="485.67" y1="197.61" x2="479.67" y2="197.61"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="485.67" cy="197.61" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C49 | 10uF | C_0603_1608Metric | (23.8300, 69.1350) mm | 90.0 deg</title><rect x="454.82" y="190.72" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 456.99 192.22)" />
+<line x1="456.99" y1="192.22" x2="456.99" y2="186.22"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="456.99" cy="192.22" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C49 | 10uF | C_0603_1608Metric | (66.3700, 69.1350) mm | 90.0 deg</title><rect x="917.74" y="190.72" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 919.92 192.22)" />
+<line x1="919.92" y1="192.22" x2="919.92" y2="186.22"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="919.92" cy="192.22" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C50 | 10uF | C_0603_1608Metric | (64.9150, 69.1350) mm | 90.0 deg</title><rect x="901.91" y="190.72" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 904.09 192.22)" />
+<line x1="904.09" y1="192.22" x2="904.09" y2="186.22"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="904.09" cy="192.22" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C50 | 10uF | C_0603_1608Metric | (22.3750, 69.1350) mm | 90.0 deg</title><rect x="438.98" y="190.72" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 441.16 192.22)" />
+<line x1="441.16" y1="192.22" x2="441.16" y2="186.22"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="441.16" cy="192.22" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C51 | 10uF | C_0603_1608Metric | (20.9200, 69.1350) mm | 90.0 deg</title><rect x="423.15" y="190.72" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 425.33 192.22)" />
+<line x1="425.33" y1="192.22" x2="425.33" y2="186.22"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="425.33" cy="192.22" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C51 | 10uF | C_0603_1608Metric | (63.4600, 69.1350) mm | 90.0 deg</title><rect x="886.08" y="190.72" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 888.25 192.22)" />
+<line x1="888.25" y1="192.22" x2="888.25" y2="186.22"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="888.25" cy="192.22" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C52 | 120pF | C_0402_1005Metric | (24.3750, 73.1200) mm | 180.0 deg</title><rect x="461.42" y="147.36" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 462.92 148.86)" />
+<line x1="462.92" y1="148.86" x2="456.92" y2="148.86"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="462.92" cy="148.86" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>C52 | 120pF | C_0402_1005Metric | (66.9150, 73.1200) mm | 180.0 deg</title><rect x="924.35" y="147.36" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2f6fdd" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 925.85 148.86)" />
+<line x1="925.85" y1="148.86" x2="919.85" y2="148.86"
+      stroke="#2f6fdd" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="925.85" cy="148.86" r="1.80" fill="#2f6fdd" opacity="0.92" /></g>
+<g><title>D1 | LED | LED_0603_1608Metric | (42.4875, 37.3750) mm | 180.0 deg</title><rect x="657.85" y="536.34" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#9c3fb3" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 660.03 537.84)" />
+<line x1="660.03" y1="537.84" x2="654.03" y2="537.84"
+      stroke="#9c3fb3" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="660.03" cy="537.84" r="1.80" fill="#9c3fb3" opacity="0.92" /></g>
+<g><title>D1 | DOWO_RCLAMP0524P | RCLAMP0524PATCT | (9.9850, 68.0200) mm | 0.0 deg</title><rect x="304.15" y="202.85" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#9c3fb3" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 306.33 204.35)" />
+<line x1="306.33" y1="204.35" x2="312.33" y2="204.35"
+      stroke="#9c3fb3" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="306.33" cy="204.35" r="1.80" fill="#9c3fb3" opacity="0.92" /></g>
+<g><title>D1 | LED | LED_0603_1608Metric | (-0.0525, 37.3800) mm | 180.0 deg</title><rect x="194.92" y="536.28" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#9c3fb3" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 197.10 537.78)" />
+<line x1="197.10" y1="537.78" x2="191.10" y2="537.78"
+      stroke="#9c3fb3" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="197.10" cy="537.78" r="1.80" fill="#9c3fb3" opacity="0.92" /></g>
+<g><title>D1 | DOWO_RCLAMP0524P | RCLAMP0524PATCT | (52.5250, 68.0200) mm | 0.0 deg</title><rect x="767.08" y="202.85" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#9c3fb3" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 769.26 204.35)" />
+<line x1="769.26" y1="204.35" x2="775.26" y2="204.35"
+      stroke="#9c3fb3" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="769.26" cy="204.35" r="1.80" fill="#9c3fb3" opacity="0.92" /></g>
+<g><title>D2 | DOWO_RCLAMP0524P | RCLAMP0524PATCT | (12.7250, 68.0200) mm | 0.0 deg</title><rect x="333.97" y="202.85" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#9c3fb3" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 336.15 204.35)" />
+<line x1="336.15" y1="204.35" x2="342.15" y2="204.35"
+      stroke="#9c3fb3" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="336.15" cy="204.35" r="1.80" fill="#9c3fb3" opacity="0.92" /></g>
+<g><title>D2 | DOWO_RCLAMP0524P | RCLAMP0524PATCT | (55.2650, 68.0200) mm | 0.0 deg</title><rect x="796.90" y="202.85" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#9c3fb3" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 799.07 204.35)" />
+<line x1="799.07" y1="204.35" x2="805.07" y2="204.35"
+      stroke="#9c3fb3" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="799.07" cy="204.35" r="1.80" fill="#9c3fb3" opacity="0.92" /></g>
+<g><title>D3 | LED | LED_0603_1608Metric | (62.8400, 37.3750) mm | 180.0 deg</title><rect x="879.33" y="536.34" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#9c3fb3" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 881.51 537.84)" />
+<line x1="881.51" y1="537.84" x2="875.51" y2="537.84"
+      stroke="#9c3fb3" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="881.51" cy="537.84" r="1.80" fill="#9c3fb3" opacity="0.92" /></g>
+<g><title>D3 | LED | LED_0603_1608Metric | (20.3000, 37.3800) mm | 180.0 deg</title><rect x="416.40" y="536.28" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#9c3fb3" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 418.58 537.78)" />
+<line x1="418.58" y1="537.78" x2="412.58" y2="537.78"
+      stroke="#9c3fb3" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="418.58" cy="537.78" r="1.80" fill="#9c3fb3" opacity="0.92" /></g>
+<g><title>FB5 | 120 | BLM18SP221SN1B | (2.6950, 63.1500) mm | 0.0 deg</title><rect x="224.82" y="255.85" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 227.00 257.35)" />
+<line x1="227.00" y1="257.35" x2="233.00" y2="257.35"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="227.00" cy="257.35" r="1.80" fill="#586174" opacity="0.92" /></g>
+<g><title>FB5 | 120 | BLM18SP221SN1B | (45.2350, 63.1500) mm | 0.0 deg</title><rect x="687.75" y="255.85" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 689.92 257.35)" />
+<line x1="689.92" y1="257.35" x2="695.92" y2="257.35"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="689.92" cy="257.35" r="1.80" fill="#586174" opacity="0.92" /></g>
+<g><title>FB6 | 120 | BLM18SP221SN1B | (60.5600, 54.8600) mm | 180.0 deg</title><rect x="854.52" y="346.06" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 856.69 347.56)" />
+<line x1="856.69" y1="347.56" x2="850.69" y2="347.56"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="856.69" cy="347.56" r="1.80" fill="#586174" opacity="0.92" /></g>
+<g><title>FB6 | 120 | BLM18SP221SN1B | (18.0200, 54.8600) mm | 180.0 deg</title><rect x="391.59" y="346.06" width="4.35" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 393.77 347.56)" />
+<line x1="393.77" y1="347.56" x2="387.77" y2="347.56"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="393.77" cy="347.56" r="1.80" fill="#586174" opacity="0.92" /></g>
+<g><title>IC1 | LIFCL-17-7SG72C_ab | QFN50P1000X1000X90-73N-D | (52.5250, 55.2900) mm | -90.0 deg</title><rect x="755.65" y="329.28" width="27.21" height="27.21" rx="1.5" ry="1.5"
+      fill="none" stroke="#c84d3a" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 769.26 342.88)" />
+<line x1="769.26" y1="342.88" x2="769.26" y2="356.88"
+      stroke="#c84d3a" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="769.26" cy="342.88" r="3.20" fill="#c84d3a" opacity="0.92" /></g>
+<g><title>IC1 | LIFCL-17-7SG72C_ab | QFN50P1000X1000X90-73N-D | (9.9850, 55.2900) mm | -90.0 deg</title><rect x="292.73" y="329.28" width="27.21" height="27.21" rx="1.5" ry="1.5"
+      fill="none" stroke="#c84d3a" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 306.33 342.88)" />
+<line x1="306.33" y1="342.88" x2="306.33" y2="356.88"
+      stroke="#c84d3a" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="306.33" cy="342.88" r="3.20" fill="#c84d3a" opacity="0.92" /></g>
+<g><title>IC2 | S25FS128SAGNFI100 | SON127P600X500X80-9N-D | (19.2340, 46.8400) mm | 180.0 deg</title><rect x="398.82" y="428.04" width="16.32" height="13.60" rx="1.5" ry="1.5"
+      fill="none" stroke="#c84d3a" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 406.98 434.84)" />
+<line x1="406.98" y1="434.84" x2="397.18" y2="434.84"
+      stroke="#c84d3a" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="406.98" cy="434.84" r="2.99" fill="#c84d3a" opacity="0.92" /></g>
+<g><title>IC2 | S25FS128SAGNFI100 | SON127P600X500X80-9N-D | (61.7740, 46.8400) mm | 180.0 deg</title><rect x="861.74" y="428.04" width="16.32" height="13.60" rx="1.5" ry="1.5"
+      fill="none" stroke="#c84d3a" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 869.90 434.84)" />
+<line x1="869.90" y1="434.84" x2="860.11" y2="434.84"
+      stroke="#c84d3a" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="869.90" cy="434.84" r="2.99" fill="#c84d3a" opacity="0.92" /></g>
+<g><title>IC3 | STM32U083KCU6 | QFN50P500X500X60-33N-D | (22.7770, 58.3560) mm | 90.0 deg</title><rect x="438.73" y="302.72" width="13.60" height="13.60" rx="1.5" ry="1.5"
+      fill="none" stroke="#c84d3a" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 445.53 309.52)" />
+<line x1="445.53" y1="309.52" x2="445.53" y2="301.36"
+      stroke="#c84d3a" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="445.53" cy="309.52" r="2.99" fill="#c84d3a" opacity="0.92" /></g>
+<g><title>IC3 | STM32U083KCU6 | QFN50P500X500X60-33N-D | (65.3170, 58.3560) mm | 90.0 deg</title><rect x="901.66" y="302.72" width="13.60" height="13.60" rx="1.5" ry="1.5"
+      fill="none" stroke="#c84d3a" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 908.46 309.52)" />
+<line x1="908.46" y1="309.52" x2="908.46" y2="301.36"
+      stroke="#c84d3a" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="908.46" cy="309.52" r="2.99" fill="#c84d3a" opacity="0.92" /></g>
+<g><title>IC5 | IS66WVH16M8DALL-166B1LI | BGA24C100P5X5_600X800X100 | (-3.6750, 54.9550) mm | 0.0 deg</title><rect x="149.52" y="335.65" width="16.32" height="21.76" rx="1.5" ry="1.5"
+      fill="none" stroke="#c84d3a" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 157.68 346.53)" />
+<line x1="157.68" y1="346.53" x2="170.74" y2="346.53"
+      stroke="#c84d3a" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="157.68" cy="346.53" r="3.20" fill="#c84d3a" opacity="0.92" /></g>
+<g><title>IC5 | IS66WVH16M8DALL-166B1LI | BGA24C100P5X5_600X800X100 | (38.8650, 54.9550) mm | 0.0 deg</title><rect x="612.44" y="335.65" width="16.32" height="21.76" rx="1.5" ry="1.5"
+      fill="none" stroke="#c84d3a" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 620.61 346.53)" />
+<line x1="620.61" y1="346.53" x2="633.66" y2="346.53"
+      stroke="#c84d3a" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="620.61" cy="346.53" r="3.20" fill="#c84d3a" opacity="0.92" /></g>
+<g><title>IC6 | TLV62595DMQR | TLV62595DMQR | (-2.6250, 24.4350) mm | -90.0 deg</title><rect x="162.30" y="671.85" width="13.60" height="13.60" rx="1.5" ry="1.5"
+      fill="none" stroke="#c84d3a" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 169.11 678.65)" />
+<line x1="169.11" y1="678.65" x2="169.11" y2="686.82"
+      stroke="#c84d3a" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="169.11" cy="678.65" r="2.99" fill="#c84d3a" opacity="0.92" /></g>
+<g><title>IC6 | TLV62595DMQR | TLV62595DMQR | (39.9150, 24.4300) mm | -90.0 deg</title><rect x="625.23" y="671.91" width="13.60" height="13.60" rx="1.5" ry="1.5"
+      fill="none" stroke="#c84d3a" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 632.03 678.71)" />
+<line x1="632.03" y1="678.71" x2="632.03" y2="686.87"
+      stroke="#c84d3a" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="632.03" cy="678.71" r="2.99" fill="#c84d3a" opacity="0.92" /></g>
+<g><title>IC7 | TLV62595DMQR | TLV62595DMQR | (37.6450, 70.6000) mm | 0.0 deg</title><rect x="600.53" y="169.48" width="13.60" height="13.60" rx="1.5" ry="1.5"
+      fill="none" stroke="#c84d3a" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 607.33 176.28)" />
+<line x1="607.33" y1="176.28" x2="615.49" y2="176.28"
+      stroke="#c84d3a" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="607.33" cy="176.28" r="2.99" fill="#c84d3a" opacity="0.92" /></g>
+<g><title>IC7 | TLV62595DMQR | TLV62595DMQR | (-4.8950, 70.6000) mm | 0.0 deg</title><rect x="137.60" y="169.48" width="13.60" height="13.60" rx="1.5" ry="1.5"
+      fill="none" stroke="#c84d3a" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 144.40 176.28)" />
+<line x1="144.40" y1="176.28" x2="152.56" y2="176.28"
+      stroke="#c84d3a" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="144.40" cy="176.28" r="2.99" fill="#c84d3a" opacity="0.92" /></g>
+<g><title>IC8 | TLV62595DMQR | TLV62595DMQR | (69.0050, 70.5900) mm | -90.0 deg</title><rect x="941.79" y="169.59" width="13.60" height="13.60" rx="1.5" ry="1.5"
+      fill="none" stroke="#c84d3a" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 948.59 176.39)" />
+<line x1="948.59" y1="176.39" x2="948.59" y2="184.55"
+      stroke="#c84d3a" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="948.59" cy="176.39" r="2.99" fill="#c84d3a" opacity="0.92" /></g>
+<g><title>IC8 | TLV62595DMQR | TLV62595DMQR | (26.4650, 70.5900) mm | -90.0 deg</title><rect x="478.87" y="169.59" width="13.60" height="13.60" rx="1.5" ry="1.5"
+      fill="none" stroke="#c84d3a" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 485.67 176.39)" />
+<line x1="485.67" y1="176.39" x2="485.67" y2="184.55"
+      stroke="#c84d3a" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="485.67" cy="176.39" r="2.99" fill="#c84d3a" opacity="0.92" /></g>
+<g><title>J1 | DF40HC_3.0_-50DS-0.4V_51_ | DF40HC3050DS04V51 | (52.5250, 71.7900) mm | 180.0 deg</title><rect x="758.37" y="159.25" width="21.76" height="8.16" rx="1.5" ry="1.5"
+      fill="none" stroke="#d1830f" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 769.26 163.33)" />
+<line x1="769.26" y1="163.33" x2="756.20" y2="163.33"
+      stroke="#d1830f" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="769.26" cy="163.33" r="1.80" fill="#d1830f" opacity="0.92" /></g>
+<g><title>J1 | DF40HC_3.0_-50DS-0.4V_51_ | DF40HC3050DS04V51 | (9.9850, 71.7900) mm | 180.0 deg</title><rect x="295.45" y="159.25" width="21.76" height="8.16" rx="1.5" ry="1.5"
+      fill="none" stroke="#d1830f" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 306.33 163.33)" />
+<line x1="306.33" y1="163.33" x2="293.27" y2="163.33"
+      stroke="#d1830f" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="306.33" cy="163.33" r="1.80" fill="#d1830f" opacity="0.92" /></g>
+<g><title>J2 | DF40HC_3.0_-50DS-0.4V_51_ | DF40HC3050DS04V51 | (9.9850, 35.2350) mm | 180.0 deg</title><rect x="295.45" y="557.05" width="21.76" height="8.16" rx="1.5" ry="1.5"
+      fill="none" stroke="#d1830f" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 306.33 561.13)" />
+<line x1="306.33" y1="561.13" x2="293.27" y2="561.13"
+      stroke="#d1830f" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="306.33" cy="561.13" r="1.80" fill="#d1830f" opacity="0.92" /></g>
+<g><title>J2 | DF40HC_3.0_-50DS-0.4V_51_ | DF40HC3050DS04V51 | (52.5250, 35.2300) mm | 180.0 deg</title><rect x="758.37" y="557.10" width="21.76" height="8.16" rx="1.5" ry="1.5"
+      fill="none" stroke="#d1830f" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 769.26 561.18)" />
+<line x1="769.26" y1="561.18" x2="756.20" y2="561.18"
+      stroke="#d1830f" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="769.26" cy="561.18" r="1.80" fill="#d1830f" opacity="0.92" /></g>
+<g><title>L3 | TFM201610ALC-R47MTAA | INDC2016X80N | (-3.4900, 20.2650) mm | 180.0 deg</title><rect x="132.27" y="722.53" width="54.85" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 159.69 724.03)" />
+<line x1="159.69" y1="724.03" x2="145.69" y2="724.03"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="159.69" cy="724.03" r="1.80" fill="#586174" opacity="0.92" /></g>
+<g><title>L3 | TFM201610ALC-R47MTAA | INDC2016X80N | (39.0500, 20.2600) mm | 180.0 deg</title><rect x="595.20" y="722.59" width="54.85" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 622.62 724.09)" />
+<line x1="622.62" y1="724.09" x2="608.62" y2="724.09"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="622.62" cy="724.09" r="1.80" fill="#586174" opacity="0.92" /></g>
+<g><title>L4 | TFM201610ALC-R47MTAA | INDC2016X80N | (-0.7250, 69.7350) mm | -90.0 deg</title><rect x="162.36" y="184.19" width="54.85" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 189.78 185.69)" />
+<line x1="189.78" y1="185.69" x2="189.78" y2="199.69"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="189.78" cy="185.69" r="1.80" fill="#586174" opacity="0.92" /></g>
+<g><title>L4 | TFM201610ALC-R47MTAA | INDC2016X80N | (41.8150, 69.7350) mm | -90.0 deg</title><rect x="625.28" y="184.19" width="54.85" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 652.71 185.69)" />
+<line x1="652.71" y1="185.69" x2="652.71" y2="199.69"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="652.71" cy="185.69" r="1.80" fill="#586174" opacity="0.92" /></g>
+<g><title>L5 | TFM201610ALC-R47MTAA | INDC2016X80N | (68.1400, 66.4200) mm | 180.0 deg</title><rect x="911.76" y="220.27" width="54.85" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 939.18 221.77)" />
+<line x1="939.18" y1="221.77" x2="925.18" y2="221.77"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="939.18" cy="221.77" r="1.80" fill="#586174" opacity="0.92" /></g>
+<g><title>L5 | TFM201610ALC-R47MTAA | INDC2016X80N | (25.6000, 66.4200) mm | 180.0 deg</title><rect x="448.83" y="220.27" width="54.85" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 476.25 221.77)" />
+<line x1="476.25" y1="221.77" x2="462.25" y2="221.77"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="476.25" cy="221.77" r="1.80" fill="#586174" opacity="0.92" /></g>
+<g><title>Q1 | SSM3K36MFV | L3F | (62.8400, 34.6000) mm | 90.0 deg</title><rect x="876.06" y="562.60" width="10.88" height="10.88" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 881.51 568.04)" />
+<line x1="881.51" y1="568.04" x2="881.51" y2="561.51"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="881.51" cy="568.04" r="2.39" fill="#586174" opacity="0.92" /></g>
+<g><title>Q1 | SSM3K36MFV | L3F | (20.3000, 34.6050) mm | 90.0 deg</title><rect x="413.14" y="562.54" width="10.88" height="10.88" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 418.58 567.98)" />
+<line x1="418.58" y1="567.98" x2="418.58" y2="561.45"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="418.58" cy="567.98" r="2.39" fill="#586174" opacity="0.92" /></g>
+<g><title>Q2 | SSM3K36MFV | L3F | (42.4875, 34.6000) mm | 180.0 deg</title><rect x="654.59" y="562.60" width="10.88" height="10.88" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 660.03 568.04)" />
+<line x1="660.03" y1="568.04" x2="653.50" y2="568.04"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="660.03" cy="568.04" r="2.39" fill="#586174" opacity="0.92" /></g>
+<g><title>Q2 | SSM3K36MFV | L3F | (-0.0525, 34.6050) mm | 180.0 deg</title><rect x="191.66" y="562.54" width="10.88" height="10.88" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 197.10 567.98)" />
+<line x1="197.10" y1="567.98" x2="190.57" y2="567.98"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="197.10" cy="567.98" r="2.39" fill="#586174" opacity="0.92" /></g>
+<g><title>R1 | 5k1 | R_0402_1005Metric | (10.7100, 9.5850) mm | 90.0 deg</title><rect x="312.72" y="838.75" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 314.22 840.25)" />
+<line x1="314.22" y1="840.25" x2="314.22" y2="834.25"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="314.22" cy="840.25" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R1 | 5k1 | R_0402_1005Metric | (53.2500, 9.5800) mm | 90.0 deg</title><rect x="775.65" y="838.81" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 777.15 840.31)" />
+<line x1="777.15" y1="840.31" x2="777.15" y2="834.31"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="777.15" cy="840.31" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R2 | 2k2 | R_0402_1005Metric | (62.8400, 36.0750) mm | 0.0 deg</title><rect x="880.01" y="550.49" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 881.51 551.99)" />
+<line x1="881.51" y1="551.99" x2="887.51" y2="551.99"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="881.51" cy="551.99" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R2 | 100k | R_0402_1005Metric | (26.7350, 72.4400) mm | 180.0 deg</title><rect x="487.11" y="154.76" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 488.61 156.26)" />
+<line x1="488.61" y1="156.26" x2="482.61" y2="156.26"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="488.61" cy="156.26" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R2 | 100k | R_0402_1005Metric | (69.2750, 72.4400) mm | 180.0 deg</title><rect x="950.03" y="154.76" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 951.53 156.26)" />
+<line x1="951.53" y1="156.26" x2="945.53" y2="156.26"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="951.53" cy="156.26" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R2 | 2k2 | R_0402_1005Metric | (20.3000, 36.0800) mm | 0.0 deg</title><rect x="417.08" y="550.43" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 418.58 551.93)" />
+<line x1="418.58" y1="551.93" x2="424.58" y2="551.93"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="418.58" cy="551.93" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R3 | 5k1 | R_0402_1005Metric | (7.7000, 9.6000) mm | 90.0 deg</title><rect x="279.96" y="838.59" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 281.46 840.09)" />
+<line x1="281.46" y1="840.09" x2="281.46" y2="834.09"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="281.46" cy="840.09" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R3 | 5k1 | R_0402_1005Metric | (50.2400, 9.5950) mm | 90.0 deg</title><rect x="742.89" y="838.64" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 744.39 840.14)" />
+<line x1="744.39" y1="840.14" x2="744.39" y2="834.14"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="744.39" cy="840.14" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R4 | 4k7 | R_0402_1005Metric | (56.2600, 43.9950) mm | 0.0 deg</title><rect x="808.40" y="464.30" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 809.90 465.80)" />
+<line x1="809.90" y1="465.80" x2="815.90" y2="465.80"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="809.90" cy="465.80" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R4 | 220 | R_0402_1005Metric | (17.8500, 34.3825) mm | 90.0 deg</title><rect x="390.42" y="568.90" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 391.92 570.40)" />
+<line x1="391.92" y1="570.40" x2="391.92" y2="564.40"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="391.92" cy="570.40" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R4 | 220 | R_0402_1005Metric | (60.3900, 34.3775) mm | 90.0 deg</title><rect x="853.34" y="568.96" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 854.84 570.46)" />
+<line x1="854.84" y1="570.46" x2="854.84" y2="564.46"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="854.84" cy="570.46" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R4 | 4k7 | R_0402_1005Metric | (13.7200, 43.9950) mm | 0.0 deg</title><rect x="345.47" y="464.30" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 346.97 465.80)" />
+<line x1="346.97" y1="465.80" x2="352.97" y2="465.80"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="346.97" cy="465.80" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R5 | 100k | R_0402_1005Metric | (18.8500, 34.3825) mm | -90.0 deg</title><rect x="401.30" y="568.90" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 402.80 570.40)" />
+<line x1="402.80" y1="570.40" x2="402.80" y2="576.40"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="402.80" cy="570.40" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R5 | 100k | R_0402_1005Metric | (61.3900, 34.3775) mm | -90.0 deg</title><rect x="864.23" y="568.96" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 865.73 570.46)" />
+<line x1="865.73" y1="570.46" x2="865.73" y2="576.46"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="865.73" cy="570.46" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R6 | 100k | R_0402_1005Metric | (35.9750, 71.1400) mm | -90.0 deg</title><rect x="587.66" y="168.90" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 589.16 170.40)" />
+<line x1="589.16" y1="170.40" x2="589.16" y2="176.40"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="589.16" cy="170.40" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R6 | 220 | R_0402_1005Metric | (-0.0500, 33.0800) mm | 0.0 deg</title><rect x="195.63" y="583.08" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 197.13 584.58)" />
+<line x1="197.13" y1="584.58" x2="203.13" y2="584.58"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="197.13" cy="584.58" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R6 | 100k | R_0402_1005Metric | (-6.5650, 71.1400) mm | -90.0 deg</title><rect x="124.73" y="168.90" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 126.23 170.40)" />
+<line x1="126.23" y1="170.40" x2="126.23" y2="176.40"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="126.23" cy="170.40" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R6 | 220 | R_0402_1005Metric | (42.4900, 33.0750) mm | 0.0 deg</title><rect x="658.55" y="583.13" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 660.05 584.63)" />
+<line x1="660.05" y1="584.63" x2="666.05" y2="584.63"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="660.05" cy="584.63" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R8 | 1k | R_0402_1005Metric | (70.9550, 57.9400) mm | 180.0 deg</title><rect x="968.31" y="312.55" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 969.81 314.05)" />
+<line x1="969.81" y1="314.05" x2="963.81" y2="314.05"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="969.81" cy="314.05" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R8 | 1k | R_0402_1005Metric | (28.4150, 57.9400) mm | 180.0 deg</title><rect x="505.39" y="312.55" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 506.89 314.05)" />
+<line x1="506.89" y1="314.05" x2="500.89" y2="314.05"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="506.89" cy="314.05" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R9 | 1k | R_0402_1005Metric | (70.9550, 58.8900) mm | 180.0 deg</title><rect x="968.31" y="302.21" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 969.81 303.71)" />
+<line x1="969.81" y1="303.71" x2="963.81" y2="303.71"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="969.81" cy="303.71" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R9 | 1k | R_0402_1005Metric | (28.4150, 58.8900) mm | 180.0 deg</title><rect x="505.39" y="302.21" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 506.89 303.71)" />
+<line x1="506.89" y1="303.71" x2="500.89" y2="303.71"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="506.89" cy="303.71" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R11 | 33 | R_0402_1005Metric | (8.7050, 63.8600) mm | 90.0 deg</title><rect x="290.90" y="248.12" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 292.40 249.62)" />
+<line x1="292.40" y1="249.62" x2="292.40" y2="243.62"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="292.40" cy="249.62" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R11 | 33 | R_0402_1005Metric | (51.2450, 63.8600) mm | 90.0 deg</title><rect x="753.83" y="248.12" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 755.33 249.62)" />
+<line x1="755.33" y1="249.62" x2="755.33" y2="243.62"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="755.33" cy="249.62" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R12 | 450k | R_0402_1005Metric | (-4.7150, 26.0300) mm | 0.0 deg</title><rect x="144.86" y="659.80" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 146.36 661.30)" />
+<line x1="146.36" y1="661.30" x2="152.36" y2="661.30"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="146.36" cy="661.30" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R12 | 450k | R_0402_1005Metric | (37.8250, 26.0250) mm | 0.0 deg</title><rect x="607.79" y="659.85" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 609.29 661.35)" />
+<line x1="609.29" y1="661.35" x2="615.29" y2="661.35"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="609.29" cy="661.35" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R13 | 2k2 | R_0402_1005Metric | (42.4875, 36.0750) mm | 0.0 deg</title><rect x="658.53" y="550.49" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 660.03 551.99)" />
+<line x1="660.03" y1="551.99" x2="666.03" y2="551.99"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="660.03" cy="551.99" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R13 | 2k2 | R_0402_1005Metric | (-0.0525, 36.0800) mm | 0.0 deg</title><rect x="195.60" y="550.43" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 197.10 551.93)" />
+<line x1="197.10" y1="551.93" x2="203.10" y2="551.93"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="197.10" cy="551.93" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R16 | 100k | R_0402_1005Metric | (37.8250, 25.0800) mm | 180.0 deg</title><rect x="607.79" y="670.13" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 609.29 671.63)" />
+<line x1="609.29" y1="671.63" x2="603.29" y2="671.63"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="609.29" cy="671.63" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R16 | 100k | R_0402_1005Metric | (-4.7150, 25.0850) mm | 180.0 deg</title><rect x="144.86" y="670.08" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 146.36 671.58)" />
+<line x1="146.36" y1="671.58" x2="140.36" y2="671.58"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="146.36" cy="671.58" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R17 | 200k | R_0402_1005Metric | (-6.4900, 68.5100) mm | -90.0 deg</title><rect x="125.55" y="197.52" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 127.05 199.02)" />
+<line x1="127.05" y1="199.02" x2="127.05" y2="205.02"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="127.05" cy="199.02" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R17 | 200k | R_0402_1005Metric | (36.0500, 68.5100) mm | -90.0 deg</title><rect x="588.47" y="197.52" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 589.97 199.02)" />
+<line x1="589.97" y1="199.02" x2="589.97" y2="205.02"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="589.97" cy="199.02" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R18 | 100k | R_0402_1005Metric | (36.9950, 68.5100) mm | -90.0 deg</title><rect x="598.76" y="197.52" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 600.26 199.02)" />
+<line x1="600.26" y1="199.02" x2="600.26" y2="205.02"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="600.26" cy="199.02" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R18 | 100k | R_0402_1005Metric | (-5.5450, 68.5100) mm | -90.0 deg</title><rect x="135.83" y="197.52" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 137.33 199.02)" />
+<line x1="137.33" y1="199.02" x2="137.33" y2="205.02"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="137.33" cy="199.02" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R19 | 20k | R_0402_1005Metric | (66.9150, 72.1850) mm | 180.0 deg</title><rect x="924.35" y="157.53" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 925.85 159.03)" />
+<line x1="925.85" y1="159.03" x2="919.85" y2="159.03"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="925.85" cy="159.03" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R19 | 20k | R_0402_1005Metric | (24.3750, 72.1850) mm | 180.0 deg</title><rect x="461.42" y="157.53" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 462.92 159.03)" />
+<line x1="462.92" y1="159.03" x2="456.92" y2="159.03"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="462.92" cy="159.03" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R20 | 4k7 | R_0402_1005Metric | (54.2600, 47.1750) mm | 90.0 deg</title><rect x="786.64" y="429.69" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 788.14 431.19)" />
+<line x1="788.14" y1="431.19" x2="788.14" y2="425.19"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="788.14" cy="431.19" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R20 | 4k7 | R_0402_1005Metric | (11.7200, 47.1750) mm | 90.0 deg</title><rect x="323.71" y="429.69" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 325.21 431.19)" />
+<line x1="325.21" y1="431.19" x2="325.21" y2="425.19"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="325.21" cy="431.19" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R21 | 30k | R_0402_1005Metric | (24.3750, 71.2400) mm | 180.0 deg</title><rect x="461.42" y="167.81" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 462.92 169.31)" />
+<line x1="462.92" y1="169.31" x2="456.92" y2="169.31"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="462.92" cy="169.31" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R21 | 30k | R_0402_1005Metric | (66.9150, 71.2400) mm | 180.0 deg</title><rect x="924.35" y="167.81" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(180.00 925.85 169.31)" />
+<line x1="925.85" y1="169.31" x2="919.85" y2="169.31"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="925.85" cy="169.31" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R22 | 1k | R_0402_1005Metric | (65.7200, 18.9700) mm | 90.0 deg</title><rect x="911.35" y="736.62" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 912.85 738.12)" />
+<line x1="912.85" y1="738.12" x2="912.85" y2="732.12"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="912.85" cy="738.12" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R22 | 1k | R_0402_1005Metric | (23.1800, 18.9750) mm | 90.0 deg</title><rect x="448.42" y="736.57" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 449.92 738.07)" />
+<line x1="449.92" y1="738.07" x2="449.92" y2="732.07"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="449.92" cy="738.07" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R23 | 4k7 | R_0402_1005Metric | (65.7100, 24.4900) mm | 90.0 deg</title><rect x="911.24" y="676.56" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 912.74 678.06)" />
+<line x1="912.74" y1="678.06" x2="912.74" y2="672.06"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="912.74" cy="678.06" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R23 | 4k7 | R_0402_1005Metric | (23.1700, 24.4950) mm | 90.0 deg</title><rect x="448.31" y="676.50" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 449.81 678.00)" />
+<line x1="449.81" y1="678.00" x2="449.81" y2="672.00"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="449.81" cy="678.00" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R30 | 4k7 | R_0402_1005Metric | (53.3233, 47.1750) mm | 90.0 deg</title><rect x="776.44" y="429.69" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 777.94 431.19)" />
+<line x1="777.94" y1="431.19" x2="777.94" y2="425.19"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="777.94" cy="431.19" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R30 | 4k7 | R_0402_1005Metric | (10.7833, 47.1750) mm | 90.0 deg</title><rect x="313.52" y="429.69" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 315.02 431.19)" />
+<line x1="315.02" y1="431.19" x2="315.02" y2="425.19"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="315.02" cy="431.19" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R31 | 4k7 | R_0402_1005Metric | (9.8467, 47.1750) mm | 90.0 deg</title><rect x="303.32" y="429.69" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 304.82 431.19)" />
+<line x1="304.82" y1="431.19" x2="304.82" y2="425.19"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="304.82" cy="431.19" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R31 | 4k7 | R_0402_1005Metric | (52.3867, 47.1750) mm | 90.0 deg</title><rect x="766.25" y="429.69" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 767.75 431.19)" />
+<line x1="767.75" y1="431.19" x2="767.75" y2="425.19"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="767.75" cy="431.19" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R32 | 2k2 | R_0402_1005Metric | (7.7400, 47.1750) mm | -90.0 deg</title><rect x="280.40" y="429.69" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 281.90 431.19)" />
+<line x1="281.90" y1="431.19" x2="281.90" y2="437.19"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="281.90" cy="431.19" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>R32 | 2k2 | R_0402_1005Metric | (50.2800, 47.1750) mm | -90.0 deg</title><rect x="743.33" y="429.69" width="3.00" height="3.00" rx="1.5" ry="1.5"
+      fill="none" stroke="#2a9d55" stroke-width="0.9" opacity="0.28"
+      transform="rotate(-90.00 744.83 431.19)" />
+<line x1="744.83" y1="431.19" x2="744.83" y2="437.19"
+      stroke="#2a9d55" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="744.83" cy="431.19" r="1.80" fill="#2a9d55" opacity="0.92" /></g>
+<g><title>S1 | ALPSALPINE_SSSS811101 | EG1215AA | (26.7600, 21.7350) mm | 90.0 deg</title><rect x="485.48" y="705.99" width="6.80" height="4.08" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 488.88 708.04)" />
+<line x1="488.88" y1="708.04" x2="488.88" y2="702.04"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="488.88" cy="708.04" r="1.80" fill="#586174" opacity="0.92" /></g>
+<g><title>S1 | ALPSALPINE_SSSS811101 | EG1215AA | (69.3000, 21.7300) mm | 90.0 deg</title><rect x="948.40" y="706.05" width="6.80" height="4.08" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(90.00 951.80 708.09)" />
+<line x1="951.80" y1="708.09" x2="951.80" y2="702.09"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="951.80" cy="708.09" r="1.80" fill="#586174" opacity="0.92" /></g>
+<g><title>Y1 | Y322525MNCCZ | CX3225FB25000F0FZZH1 | (48.6950, 64.2300) mm | 0.0 deg</title><rect x="724.18" y="243.56" width="6.80" height="4.08" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 727.58 245.60)" />
+<line x1="727.58" y1="245.60" x2="733.58" y2="245.60"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="727.58" cy="245.60" r="1.80" fill="#586174" opacity="0.92" /></g>
+<g><title>Y1 | Y322525MNCCZ | CX3225FB25000F0FZZH1 | (6.1550, 64.2300) mm | 0.0 deg</title><rect x="261.25" y="243.56" width="6.80" height="4.08" rx="1.5" ry="1.5"
+      fill="none" stroke="#586174" stroke-width="0.9" opacity="0.28"
+      transform="rotate(0.00 264.65 245.60)" />
+<line x1="264.65" y1="245.60" x2="270.65" y2="245.60"
+      stroke="#586174" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+<circle cx="264.65" cy="245.60" r="1.80" fill="#586174" opacity="0.92" /></g>
+</svg>
