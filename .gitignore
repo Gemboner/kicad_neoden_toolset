@@ -1,2 +1,9 @@
 __pycache__/
 *.pyc
+
+# Local assembly-project runtime data created by the GUI.
+assembly_project/
+assembly_project.json
+generated/
+inputs/
+machine_feedback/
