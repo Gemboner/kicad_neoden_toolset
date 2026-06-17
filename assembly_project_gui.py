@@ -7,6 +7,7 @@ import json
 import shutil
 import sys
 import tempfile
+from collections import Counter
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
@@ -47,6 +48,7 @@ PATH_FIELDS = (
     "feeder_assignment_file",
     "global_offset_file",
     "neoden_project_csv",
+    "latest_feedback_neoden_csv",
 )
 
 
@@ -83,11 +85,11 @@ def resolve_path(value: str, base_dir: Path) -> str:
     return str((base_dir / raw).resolve())
 
 
-def normalize_session_name(value: str) -> str:
+def normalize_group_name(value: str) -> str:
     return " ".join((value or "").split()).strip()
 
 
-def normalize_session_refs(value: object) -> list[str]:
+def normalize_group_refs(value: object) -> list[str]:
     if not isinstance(value, list):
         return []
     refs: list[str] = []
@@ -101,16 +103,20 @@ def normalize_session_refs(value: object) -> list[str]:
     return refs
 
 
-def normalize_session_map(value: object) -> dict[str, list[str]]:
+def normalize_group_map(value: object) -> dict[str, list[str]]:
     if not isinstance(value, dict):
         return {}
-    sessions: dict[str, list[str]] = {}
+    groups: dict[str, list[str]] = {}
     for raw_name, raw_refs in value.items():
-        name = normalize_session_name(str(raw_name or ""))
-        refs = normalize_session_refs(raw_refs)
+        name = normalize_group_name(str(raw_name or ""))
+        refs = normalize_group_refs(raw_refs)
         if name and refs:
-            sessions[name] = refs
-    return sessions
+            groups[name] = refs
+    return groups
+
+
+def occurrence_key(ref: str, occurrence_index: int) -> str:
+    return f"{ref}#{occurrence_index}"
 
 
 def find_first_valid_pos_line(pos_lines: list[list[str]]) -> list[str] | None:
@@ -141,8 +147,9 @@ class ProjectState:
     chip1_x_mm: float = 0.0
     chip1_y_mm: float = 0.0
     neoden_project_csv: str = ""
-    sessions: dict[str, list[str]] = field(default_factory=dict)
-    active_session: str = ""
+    latest_feedback_neoden_csv: str = ""
+    groups: dict[str, list[str]] = field(default_factory=dict)
+    active_group: str = ""
     notes: str = ""
 
     def to_manifest_dict(self, base_dir: Path) -> dict[str, object]:
@@ -176,8 +183,11 @@ class ProjectState:
             chip1_x_mm=float(normalized.get("chip1_x_mm", 0.0) or 0.0),
             chip1_y_mm=float(normalized.get("chip1_y_mm", 0.0) or 0.0),
             neoden_project_csv=str(normalized.get("neoden_project_csv", "") or ""),
-            sessions=normalize_session_map(normalized.get("sessions")),
-            active_session=normalize_session_name(str(normalized.get("active_session", "") or "")),
+            latest_feedback_neoden_csv=str(normalized.get("latest_feedback_neoden_csv", "") or ""),
+            groups=normalize_group_map(normalized.get("groups") or normalized.get("sessions")),
+            active_group=normalize_group_name(
+                str(normalized.get("active_group", normalized.get("active_session", "")) or "")
+            ),
             notes=str(normalized.get("notes", "") or ""),
         )
 
@@ -431,6 +441,122 @@ def normalize_neoden_rotation(value: float) -> float:
     if abs(angle + 180.0) < 1e-9:
         return 180.0
     return angle
+
+
+def parse_float_cell(row: list[str], index: int) -> float | None:
+    if index >= len(row):
+        return None
+    try:
+        return float(row[index].strip())
+    except (AttributeError, ValueError):
+        return None
+
+
+def format_float_like(value: float, original_text: str, default_decimals: int) -> str:
+    text = str(original_text or "").strip()
+    decimals = default_decimals
+    if "." in text and "e" not in text.lower():
+        fraction = text.partition(".")[2]
+        if fraction.isdigit():
+            decimals = len(fraction)
+    return f"{value:.{decimals}f}"
+
+
+def rotate_point_right_angle(
+    x: float,
+    y: float,
+    center_x: float,
+    center_y: float,
+    quarter_turns_clockwise: int,
+) -> tuple[float, float]:
+    turns = quarter_turns_clockwise % 4
+    if turns == 0:
+        return x, y
+    if turns == 1:
+        return center_x + (y - center_y), center_y - (x - center_x)
+    if turns == 2:
+        return (2.0 * center_x) - x, (2.0 * center_y) - y
+    return center_x - (y - center_y), center_y + (x - center_x)
+
+
+def neoden_aux_coordinate_pairs(row: list[str]) -> list[tuple[int, int, int]]:
+    if not row:
+        return []
+    row_type = row[0].strip()
+    if row_type == "mark":
+        return [(3, 4, 4), (5, 6, 4), (7, 8, 4), (9, 10, 4)]
+    if row_type == "mirror":
+        return [(1, 2, 2)]
+    if row_type == "mirror_create":
+        return [(3, 4, 2), (5, 6, 2), (7, 8, 2)]
+    return []
+
+
+def collect_neoden_project_points(data: NeodenProjectData) -> list[tuple[float, float]]:
+    points = [(component.x, component.y) for component in data.components]
+    for row in data.rows:
+        for x_index, y_index, _ in neoden_aux_coordinate_pairs(row):
+            x_value = parse_float_cell(row, x_index)
+            y_value = parse_float_cell(row, y_index)
+            if x_value is None or y_value is None:
+                continue
+            points.append((x_value, y_value))
+    return points
+
+
+def rotate_neoden_project_data(
+    data: NeodenProjectData,
+    quarter_turns_clockwise: int,
+    center_x: float,
+    center_y: float,
+) -> None:
+    turns = quarter_turns_clockwise % 4
+    if turns == 0:
+        return
+
+    rotation_delta = {1: -90.0, 2: 180.0, 3: 90.0}[turns]
+
+    for component in data.components:
+        rotated_x, rotated_y = rotate_point_right_angle(
+            component.x,
+            component.y,
+            center_x,
+            center_y,
+            turns,
+        )
+        component.x = rotated_x
+        component.y = rotated_y
+        component.rotation = normalize_neoden_rotation(component.rotation + rotation_delta)
+        row = data.rows[component.row_index]
+        while len(row) < 10:
+            row.append("")
+        row[6] = f"{component.x:.2f}"
+        row[7] = f"{component.y:.2f}"
+        row[8] = f"{component.rotation:.2f}"
+
+    for row in data.rows:
+        if not row:
+            continue
+        row_type = row[0].strip()
+        if row_type == "pcb" and turns % 2 == 1 and len(row) > 6:
+            row[5], row[6] = row[6], row[5]
+            continue
+        if row_type == "mirror_create" and turns % 2 == 1 and len(row) > 2:
+            row[1], row[2] = row[2], row[1]
+        for x_index, y_index, default_decimals in neoden_aux_coordinate_pairs(row):
+            x_value = parse_float_cell(row, x_index)
+            y_value = parse_float_cell(row, y_index)
+            if x_value is None or y_value is None:
+                continue
+            rotated_x, rotated_y = rotate_point_right_angle(
+                x_value,
+                y_value,
+                center_x,
+                center_y,
+                turns,
+            )
+            row[x_index] = format_float_like(rotated_x, row[x_index], default_decimals)
+            row[y_index] = format_float_like(rotated_y, row[y_index], default_decimals)
 
 
 class CsvPreviewDialog(QtWidgets.QDialog):
@@ -944,6 +1070,8 @@ class FeederEditorTab(QtWidgets.QWidget):
 class NeodenProjectTab(QtWidgets.QWidget):
     assignmentSaved = QtCore.Signal(str)
     autoAssignRequested = QtCore.Signal()
+    pruneToActiveGroupRequested = QtCore.Signal()
+    syncFeedersFromLatestFeedbackRequested = QtCore.Signal()
     COLUMN_TO_ROW_INDEX = {
         0: 1,
         1: 2,
@@ -986,44 +1114,60 @@ class NeodenProjectTab(QtWidgets.QWidget):
         self.search_edit.textChanged.connect(self.populate_table)
         layout.addWidget(self.search_edit)
 
-        assignment_row = QtWidgets.QHBoxLayout()
+        assignment_row = QtWidgets.QVBoxLayout()
         assignment_row.setSpacing(6)
+        selection_row = QtWidgets.QHBoxLayout()
+        selection_row.setSpacing(6)
+        action_row = QtWidgets.QHBoxLayout()
+        action_row.setSpacing(6)
         self.selection_label = QtWidgets.QLabel("0 selected")
         self.feeder_combo = QtWidgets.QComboBox()
         self.feeder_combo.setEditable(True)
         self.feeder_combo.setInsertPolicy(QtWidgets.QComboBox.NoInsert)
-        self.feeder_combo.setMinimumWidth(220)
+        self.feeder_combo.setMinimumWidth(160)
         self.nozzle_combo = QtWidgets.QComboBox()
         self.nozzle_combo.setEditable(True)
         self.nozzle_combo.setInsertPolicy(QtWidgets.QComboBox.NoInsert)
-        self.nozzle_combo.setMinimumWidth(120)
+        self.nozzle_combo.setMinimumWidth(90)
         self.apply_feeder_btn = QtWidgets.QPushButton("Assign Feeder")
         self.clear_feeder_btn = QtWidgets.QPushButton("Clear Feeder")
         self.apply_nozzle_btn = QtWidgets.QPushButton("Assign Nozzle")
         self.apply_both_btn = QtWidgets.QPushButton("Assign Both")
         self.auto_reload_btn = QtWidgets.QPushButton("Auto Reload Feeder Assignments")
         self.global_offset_btn = QtWidgets.QPushButton("Global X/Y Offset")
+        self.rotate_project_btn = QtWidgets.QPushButton("Rotate Project")
         self.fix_bottom_rotations_btn = QtWidgets.QPushButton("Fix Bottom Rotations")
+        self.prune_group_btn = QtWidgets.QPushButton("Prune To Active Group")
+        self.sync_feedback_btn = QtWidgets.QPushButton("Sync Feeders From Latest Feedback")
         self.apply_feeder_btn.clicked.connect(self.assign_selected_feeder_from_controls)
         self.clear_feeder_btn.clicked.connect(self.clear_selected_feeder_assignments)
         self.apply_nozzle_btn.clicked.connect(self.assign_selected_nozzle_from_controls)
         self.apply_both_btn.clicked.connect(self.assign_selected_feeder_and_nozzle_from_controls)
         self.auto_reload_btn.clicked.connect(self.autoAssignRequested.emit)
         self.global_offset_btn.clicked.connect(self.prompt_global_xy_offset)
+        self.rotate_project_btn.clicked.connect(self.prompt_rotate_project)
         self.fix_bottom_rotations_btn.clicked.connect(self.apply_bottom_rotation_mirror_fix)
-        assignment_row.addWidget(self.selection_label)
-        assignment_row.addWidget(QtWidgets.QLabel("Feeder"))
-        assignment_row.addWidget(self.feeder_combo)
-        assignment_row.addWidget(QtWidgets.QLabel("Nozzle"))
-        assignment_row.addWidget(self.nozzle_combo)
-        assignment_row.addWidget(self.apply_feeder_btn)
-        assignment_row.addWidget(self.clear_feeder_btn)
-        assignment_row.addWidget(self.apply_nozzle_btn)
-        assignment_row.addWidget(self.apply_both_btn)
-        assignment_row.addWidget(self.auto_reload_btn)
-        assignment_row.addWidget(self.global_offset_btn)
-        assignment_row.addWidget(self.fix_bottom_rotations_btn)
-        assignment_row.addStretch(1)
+        self.prune_group_btn.clicked.connect(self.pruneToActiveGroupRequested.emit)
+        self.sync_feedback_btn.clicked.connect(self.syncFeedersFromLatestFeedbackRequested.emit)
+        selection_row.addWidget(self.selection_label)
+        selection_row.addWidget(QtWidgets.QLabel("Feeder"))
+        selection_row.addWidget(self.feeder_combo)
+        selection_row.addWidget(QtWidgets.QLabel("Nozzle"))
+        selection_row.addWidget(self.nozzle_combo)
+        selection_row.addWidget(self.apply_feeder_btn)
+        selection_row.addWidget(self.clear_feeder_btn)
+        selection_row.addWidget(self.apply_nozzle_btn)
+        selection_row.addWidget(self.apply_both_btn)
+        selection_row.addStretch(1)
+        action_row.addWidget(self.auto_reload_btn)
+        action_row.addWidget(self.global_offset_btn)
+        action_row.addWidget(self.rotate_project_btn)
+        action_row.addWidget(self.fix_bottom_rotations_btn)
+        action_row.addWidget(self.prune_group_btn)
+        action_row.addWidget(self.sync_feedback_btn)
+        action_row.addStretch(1)
+        assignment_row.addLayout(selection_row)
+        assignment_row.addLayout(action_row)
         layout.addLayout(assignment_row)
 
         self.table = InteractiveTableWidget()
@@ -1505,6 +1649,23 @@ class NeodenProjectTab(QtWidgets.QWidget):
             return False
         return True
 
+    def replace_stack_rows_from_feeder_rows(self, feeder_rows: list[dict[str, str]]) -> None:
+        if self.current_data is None:
+            return
+
+        first_comp_index = len(self.current_data.rows)
+        for row_index, row in enumerate(self.current_data.rows):
+            if row and row[0].strip() == "comp":
+                first_comp_index = row_index
+                break
+
+        header_rows = self.current_data.rows[:first_comp_index]
+        body_rows = self.current_data.rows[first_comp_index:]
+        header_lines = [",".join(row) for row in header_rows]
+        updated_header_lines = converter_mod.apply_feeder_csv_to_header(header_lines, feeder_rows)
+        updated_header_rows = [line.split(",") for line in updated_header_lines]
+        self.current_data.rows = updated_header_rows + body_rows
+
     def prompt_global_xy_offset(self) -> None:
         if self.current_data is None or self.current_path is None:
             QtWidgets.QMessageBox.warning(self, "NeoDen Project", "Load a NeoDen project CSV first.")
@@ -1581,6 +1742,71 @@ class NeodenProjectTab(QtWidgets.QWidget):
 
         self.assignmentSaved.emit(
             f"Applied global NeoDen offset to {len(self.current_data.components)} component(s) in {self.current_path.name}: dX {dx:+.2f} mm, dY {dy:+.2f} mm"
+        )
+        self.load_file(self.current_path)
+
+    def prompt_rotate_project(self) -> None:
+        if self.current_data is None or self.current_path is None:
+            QtWidgets.QMessageBox.warning(self, "NeoDen Project", "Load a NeoDen project CSV first.")
+            return
+
+        options = [
+            ("90° Clockwise", 1),
+            ("180°", 2),
+            ("90° Counterclockwise", 3),
+        ]
+        labels = [label for label, _ in options]
+        selected_label, accepted = QtWidgets.QInputDialog.getItem(
+            self,
+            "Rotate NeoDen Project",
+            "Rotation",
+            labels,
+            0,
+            False,
+        )
+        if not accepted:
+            return
+
+        quarter_turns = dict(options).get(selected_label)
+        if quarter_turns is None:
+            return
+
+        points = collect_neoden_project_points(self.current_data)
+        if not points:
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Rotate NeoDen Project",
+                "No component or fiducial coordinates were found to rotate.",
+            )
+            return
+
+        xs = [point[0] for point in points]
+        ys = [point[1] for point in points]
+        center_x = (min(xs) + max(xs)) / 2.0
+        center_y = (min(ys) + max(ys)) / 2.0
+
+        answer = QtWidgets.QMessageBox.question(
+            self,
+            "Rotate NeoDen Project",
+            (
+                f"Rotate the loaded NeoDen project {selected_label.lower()} around the current project center?\n\n"
+                f"Center X {center_x:.4f} mm, Y {center_y:.4f} mm\n\n"
+                "This overwrites the loaded CSV in place and updates component rows, fiducials, and mirror points."
+            ),
+            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+            QtWidgets.QMessageBox.No,
+        )
+        if answer != QtWidgets.QMessageBox.Yes:
+            return
+
+        rotate_neoden_project_data(self.current_data, quarter_turns, center_x, center_y)
+        if not self.write_current_rows_to_disk():
+            return
+        self.assignmentSaved.emit(
+            (
+                f"Rotated NeoDen project {selected_label.lower()} around "
+                f"X {center_x:.4f} mm, Y {center_y:.4f} mm in {self.current_path.name}"
+            )
         )
         self.load_file(self.current_path)
 
@@ -1681,6 +1907,8 @@ class NeodenProjectTab(QtWidgets.QWidget):
             row[1] = new_feeder
             row[2] = new_nozzle
 
+        self.replace_stack_rows_from_feeder_rows(feeder_rows)
+
         if not self.write_current_rows_to_disk():
             return
         self.assignmentSaved.emit(
@@ -1713,6 +1941,117 @@ class AssemblyProjectWindow(viewer_mod.PosViewerQtWindow):
             if pos_path is not None:
                 self.set_project_pos(pos_path, load_into_viewer=True)
 
+    def _build_ui(self) -> None:
+        super()._build_ui()
+        self.search_edit.setPlaceholderText("Search ref, value, footprint, feeder, nozzle, side, skip")
+        self.table.setColumnCount(11)
+        self.table.setHorizontalHeaderLabels(
+            ["#", "Feeder", "Nozzle", "Ref", "Value", "Footprint", "X", "Y", "Rot", "Side", "Skip"]
+        )
+
+    def _load_pos_preview_assignment_maps(
+        self,
+    ) -> tuple[
+        tuple[dict[tuple[str, str, str], tuple[str, str, str]], dict[tuple[str, str], tuple[str, str, str]], dict[str, tuple[str, str, str]]],
+        tuple[dict[tuple[str, str], str], dict[str, str]],
+    ]:
+        template_maps: tuple[
+            dict[tuple[str, str, str], tuple[str, str, str]],
+            dict[tuple[str, str], tuple[str, str, str]],
+            dict[str, tuple[str, str, str]],
+        ] = ({}, {}, {})
+        template_path = Path(self.project_state.template_file).expanduser() if self.project_state.template_file else None
+        if template_path is not None and template_path.exists():
+            try:
+                _header_lines, comp_lines = converter_mod.read_template(str(template_path))
+                template_maps = converter_mod.build_feeder_maps(comp_lines)
+            except Exception:
+                template_maps = ({}, {}, {})
+
+        feeder_csv_maps: tuple[dict[tuple[str, str], str], dict[str, str]] = ({}, {})
+        feeder_path = (
+            Path(self.project_state.feeder_assignment_file).expanduser()
+            if self.project_state.feeder_assignment_file
+            else None
+        )
+        if feeder_path is not None and feeder_path.exists():
+            try:
+                csv_by_fp_val, csv_by_fp, _stack_rows = converter_mod.load_feeder_assignment_csv(str(feeder_path))
+                feeder_csv_maps = (csv_by_fp_val, csv_by_fp)
+            except Exception:
+                feeder_csv_maps = ({}, {})
+        return template_maps, feeder_csv_maps
+
+    def _preview_assignment_for_component(
+        self,
+        component: viewer_mod.Component,
+        template_maps: tuple[
+            dict[tuple[str, str, str], tuple[str, str, str]],
+            dict[tuple[str, str], tuple[str, str, str]],
+            dict[str, tuple[str, str, str]],
+        ],
+        feeder_csv_maps: tuple[dict[tuple[str, str], str], dict[str, str]],
+    ) -> tuple[str, str, str]:
+        feeder_id, nozzle, skip = converter_mod.choose_feeder(
+            component.ref,
+            component.value,
+            component.footprint,
+            template_maps,
+            ("1", "1", "No"),
+            feeder_csv_maps,
+        )
+        return str(feeder_id).strip(), str(nozzle).strip(), str(skip).strip()
+
+    def populate_table(self) -> None:
+        query = self.search_edit.text().strip().lower()
+        self.table.setRowCount(0)
+        self.visible_component_indexes = []
+        template_maps, feeder_csv_maps = self._load_pos_preview_assignment_maps()
+        for idx, view in enumerate(self.components):
+            component = view.component
+            feeder_id, nozzle, skip = self._preview_assignment_for_component(
+                component,
+                template_maps,
+                feeder_csv_maps,
+            )
+            haystack = " ".join(
+                [
+                    component.ref,
+                    component.value,
+                    component.footprint,
+                    component.side,
+                    feeder_id,
+                    nozzle,
+                    skip,
+                    str(component.index + 1),
+                ]
+            ).lower()
+            if query and query not in haystack:
+                continue
+            row = self.table.rowCount()
+            self.table.insertRow(row)
+            self.visible_component_indexes.append(idx)
+            values = [
+                str(component.index + 1),
+                feeder_id,
+                nozzle,
+                component.ref,
+                component.value,
+                component.footprint,
+                f"{component.x:.3f}",
+                f"{component.y:.3f}",
+                f"{component.rotation:.1f}",
+                component.side,
+                skip,
+            ]
+            for col, value in enumerate(values):
+                item = QtWidgets.QTableWidgetItem(value)
+                item.setData(QtCore.Qt.UserRole, idx)
+                self.table.setItem(row, col, item)
+        self.update_component_summary()
+        self.sync_table_selection_from_indexes()
+        self.update_selection_label()
+
     def _install_main_tabs(self) -> None:
         existing = self.centralWidget()
         if existing is None:
@@ -1726,6 +2065,8 @@ class AssemblyProjectWindow(viewer_mod.PosViewerQtWindow):
             lambda message: self.log_message(message, "#86efac")
         )
         self.neoden_tab.autoAssignRequested.connect(self.auto_assign_neoden_from_feeder_editor)
+        self.neoden_tab.pruneToActiveGroupRequested.connect(self.prune_loaded_neoden_to_active_group)
+        self.neoden_tab.syncFeedersFromLatestFeedbackRequested.connect(self.sync_feeders_from_latest_feedback)
         self.feeder_editor_tab.statusMessage.connect(
             lambda message: self.log_message(message, "#86efac")
         )
@@ -1748,6 +2089,10 @@ class AssemblyProjectWindow(viewer_mod.PosViewerQtWindow):
         open_neoden_action = QtGui.QAction("Open NeoDen Project CSV", self)
         open_neoden_action.triggered.connect(self.open_neoden_project_dialog)
         file_menu.addAction(open_neoden_action)
+
+        import_feedback_action = QtGui.QAction("Import Machine Feedback NeoDen CSV", self)
+        import_feedback_action.triggered.connect(self.import_machine_feedback_neoden_dialog)
+        file_menu.addAction(import_feedback_action)
 
         save_action = QtGui.QAction("Save Project", self)
         save_action.triggered.connect(self.save_project)
@@ -1816,18 +2161,24 @@ class AssemblyProjectWindow(viewer_mod.PosViewerQtWindow):
         self.output_label.setWordWrap(True)
         form.addRow("Generated", self.output_label)
 
-        session_controls = QtWidgets.QWidget()
-        session_row = QtWidgets.QHBoxLayout(session_controls)
-        session_row.setContentsMargins(0, 0, 0, 0)
-        session_row.setSpacing(6)
-        self.session_combo = QtWidgets.QComboBox()
-        self.session_combo.setMinimumWidth(220)
-        self.select_session_btn = QtWidgets.QPushButton("Select")
-        self.delete_session_btn = QtWidgets.QPushButton("Delete")
-        session_row.addWidget(self.session_combo, 1)
-        session_row.addWidget(self.select_session_btn)
-        session_row.addWidget(self.delete_session_btn)
-        form.addRow("Sessions", session_controls)
+        self.latest_feedback_label = QtWidgets.QLabel("-")
+        self.latest_feedback_label.setWordWrap(True)
+        form.addRow("Latest Feedback", self.latest_feedback_label)
+
+        group_controls = QtWidgets.QWidget()
+        group_row = QtWidgets.QHBoxLayout(group_controls)
+        group_row.setContentsMargins(0, 0, 0, 0)
+        group_row.setSpacing(6)
+        self.group_combo = QtWidgets.QComboBox()
+        self.group_combo.setMinimumWidth(220)
+        self.create_group_btn = QtWidgets.QPushButton("Create")
+        self.select_group_btn = QtWidgets.QPushButton("Select")
+        self.delete_group_btn = QtWidgets.QPushButton("Delete")
+        group_row.addWidget(self.group_combo, 1)
+        group_row.addWidget(self.create_group_btn)
+        group_row.addWidget(self.select_group_btn)
+        group_row.addWidget(self.delete_group_btn)
+        form.addRow("Groups", group_controls)
 
         layout.addLayout(form)
 
@@ -1865,11 +2216,13 @@ class AssemblyProjectWindow(viewer_mod.PosViewerQtWindow):
         self.generate_btn.clicked.connect(self.generate_project_csv)
         self.open_generated_btn.clicked.connect(self.open_generated_dir)
         self.delete_generated_btn.clicked.connect(self.delete_generated_project)
-        self.select_session_btn.clicked.connect(self.select_active_session)
-        self.delete_session_btn.clicked.connect(self.delete_active_session)
+        self.create_group_btn.clicked.connect(self.create_group_from_selection)
+        self.select_group_btn.clicked.connect(self.select_active_group)
+        self.delete_group_btn.clicked.connect(self.delete_active_group)
         self.feeder_field.line_edit.textChanged.connect(self.on_feeder_assignment_path_changed)
 
         self.pos_field.browseRequested.connect(self.open_pos_dialog)
+        self.template_field.line_edit.textChanged.connect(self.refresh_pos_assignment_preview)
         self.template_field.browseRequested.connect(
             lambda: self.select_generic_file(
                 self.template_field,
@@ -1893,6 +2246,11 @@ class AssemblyProjectWindow(viewer_mod.PosViewerQtWindow):
         feeder_path = Path(path_text).expanduser() if path_text else None
         self.neoden_tab.set_feeder_assignment_path(feeder_path)
         self.feeder_editor_tab.set_feeder_assignment_path(feeder_path)
+        self.refresh_pos_assignment_preview()
+
+    def refresh_pos_assignment_preview(self) -> None:
+        if self.components:
+            self.populate_table()
 
     def project_local_feeder_assignment_path(self) -> Path | None:
         if self.project_dir is None:
@@ -1964,6 +2322,20 @@ class AssemblyProjectWindow(viewer_mod.PosViewerQtWindow):
         self.project_state.feeder_assignment_file = str(target)
         self.refresh_project_ui()
         self.log_message(f"Imported feeder assignment copy to {target}", "#86efac")
+
+    def latest_machine_feedback_neoden_path(self) -> Path | None:
+        configured = self.project_state.latest_feedback_neoden_csv
+        if configured and Path(configured).exists():
+            return Path(configured).resolve()
+        if self.project_dir is None:
+            return None
+        feedback_dir = self.project_dir / "machine_feedback"
+        if not feedback_dir.exists():
+            return None
+        candidates = [path for path in feedback_dir.glob("*.csv") if path.is_file()]
+        if not candidates:
+            return None
+        return max(candidates, key=lambda path: path.stat().st_mtime).resolve()
 
     def suggested_manifest_path(self) -> Path:
         if self.manifest_path is not None:
@@ -2050,8 +2422,9 @@ class AssemblyProjectWindow(viewer_mod.PosViewerQtWindow):
             chip1_x_mm=float(self.chip1_x_spin.value()),
             chip1_y_mm=float(self.chip1_y_spin.value()),
             neoden_project_csv=self.project_state.neoden_project_csv,
-            sessions=dict(self.project_state.sessions),
-            active_session=normalize_session_name(self.session_combo.currentText()),
+            latest_feedback_neoden_csv=self.project_state.latest_feedback_neoden_csv,
+            groups=dict(self.project_state.groups),
+            active_group=normalize_group_name(self.group_combo.currentText()),
             notes=self.notes_edit.toPlainText().strip(),
         )
 
@@ -2084,7 +2457,8 @@ class AssemblyProjectWindow(viewer_mod.PosViewerQtWindow):
         self.side_value_label.setText(self.side_combo.currentText())
         self.manifest_label.setText(str(self.manifest_path) if self.manifest_path else "-")
         self.output_label.setText(state.neoden_project_csv or "-")
-        self.refresh_session_controls()
+        self.latest_feedback_label.setText(state.latest_feedback_neoden_csv or "-")
+        self.refresh_group_controls()
         self.summary_label.setText(self.build_project_summary())
 
     def build_project_summary(self) -> str:
@@ -2095,142 +2469,163 @@ class AssemblyProjectWindow(viewer_mod.PosViewerQtWindow):
             parts.append(f"POS: {Path(self.project_state.pos_file).name}")
         if self.project_state.neoden_project_csv:
             parts.append(f"NeoDen: {Path(self.project_state.neoden_project_csv).name}")
-        if self.project_state.sessions:
-            parts.append(f"Sessions: {len(self.project_state.sessions)}")
+        if self.project_state.latest_feedback_neoden_csv:
+            parts.append(f"Feedback: {Path(self.project_state.latest_feedback_neoden_csv).name}")
+        if self.project_state.groups:
+            parts.append(f"Groups: {len(self.project_state.groups)}")
         if not parts:
             return "No project manifest yet. Create or save a project to persist the job state."
         return " | ".join(parts)
 
-    def refresh_session_controls(self) -> None:
-        current_name = normalize_session_name(self.project_state.active_session)
-        available_names = sorted(self.project_state.sessions)
-        if current_name not in self.project_state.sessions:
+    def refresh_group_controls(self) -> None:
+        current_name = normalize_group_name(self.project_state.active_group)
+        available_names = sorted(self.project_state.groups)
+        if current_name not in self.project_state.groups:
             current_name = available_names[0] if available_names else ""
-            self.project_state.active_session = current_name
+            self.project_state.active_group = current_name
 
-        self.session_combo.blockSignals(True)
-        self.session_combo.clear()
+        self.group_combo.blockSignals(True)
+        self.group_combo.clear()
         for name in available_names:
-            self.session_combo.addItem(name)
+            self.group_combo.addItem(name)
         if current_name:
-            combo_index = self.session_combo.findText(current_name)
+            combo_index = self.group_combo.findText(current_name)
             if combo_index >= 0:
-                self.session_combo.setCurrentIndex(combo_index)
-        self.session_combo.blockSignals(False)
+                self.group_combo.setCurrentIndex(combo_index)
+        self.group_combo.blockSignals(False)
 
-        has_sessions = bool(available_names)
-        self.session_combo.setEnabled(has_sessions)
-        self.select_session_btn.setEnabled(has_sessions)
-        self.delete_session_btn.setEnabled(has_sessions)
+        has_groups = bool(available_names)
+        self.group_combo.setEnabled(has_groups)
+        self.select_group_btn.setEnabled(has_groups)
+        self.delete_group_btn.setEnabled(has_groups)
 
-    def next_session_name(self) -> str:
-        used = set(self.project_state.sessions)
+    def next_group_name(self) -> str:
+        used = set(self.project_state.groups)
         counter = 1
         while True:
-            name = f"Session {counter}"
+            name = f"Group {counter}"
             if name not in used:
                 return name
             counter += 1
 
-    def session_refs_for_name(self, session_name: str) -> list[str]:
-        return list(self.project_state.sessions.get(normalize_session_name(session_name), []))
+    def group_refs_for_name(self, group_name: str) -> list[str]:
+        return list(self.project_state.groups.get(normalize_group_name(group_name), []))
 
-    def component_indexes_for_refs(self, refs: list[str]) -> list[int]:
-        wanted = set(refs)
-        return [
-            idx
-            for idx, view in enumerate(self.components)
-            if view.component.ref in wanted
+    def component_group_keys(self) -> list[str]:
+        counts: Counter[str] = Counter()
+        keys: list[str] = []
+        for view in self.components:
+            ref = view.component.ref
+            counts[ref] += 1
+            keys.append(occurrence_key(ref, counts[ref]))
+        return keys
+
+    def group_keys_for_selected_indexes(self, selected_indexes: list[int]) -> list[str]:
+        component_keys = self.component_group_keys()
+        keys = [
+            component_keys[idx]
+            for idx in selected_indexes
+            if 0 <= idx < len(component_keys)
         ]
+        return normalize_group_refs(keys)
 
-    def create_session_from_selection(self) -> None:
+    def component_indexes_for_group_keys(self, group_keys: list[str]) -> list[int]:
+        wanted = set(group_keys)
+        component_keys = self.component_group_keys()
+        indexes = [
+            idx
+            for idx, key in enumerate(component_keys)
+            if key in wanted or self.components[idx].component.ref in wanted
+        ]
+        return indexes
+
+    def create_group_from_selection(self) -> None:
         selected_indexes = sorted(self.selected_indexes)
         if not selected_indexes:
             QtWidgets.QMessageBox.warning(
                 self,
-                "Create Session",
-                "Select one or more components in the preview first.",
+                "Create Group",
+                "Select one or more components in the preview or POS table first.",
             )
             return
-        default_name = self.next_session_name()
+        default_name = self.next_group_name()
         name, accepted = QtWidgets.QInputDialog.getText(
             self,
-            "Create Session",
-            "Session name",
+            "Create Group",
+            "Group name",
             text=default_name,
         )
         if not accepted:
             return
-        session_name = normalize_session_name(name)
-        if not session_name:
-            QtWidgets.QMessageBox.warning(self, "Create Session", "Session name cannot be empty.")
+        group_name = normalize_group_name(name)
+        if not group_name:
+            QtWidgets.QMessageBox.warning(self, "Create Group", "Group name cannot be empty.")
             return
-        if session_name in self.project_state.sessions:
+        if group_name in self.project_state.groups:
             answer = QtWidgets.QMessageBox.question(
                 self,
-                "Replace Session",
-                f"Replace the existing session '{session_name}'?",
+                "Replace Group",
+                f"Replace the existing group '{group_name}'?",
                 QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
                 QtWidgets.QMessageBox.No,
             )
             if answer != QtWidgets.QMessageBox.Yes:
                 return
 
-        refs = [self.components[idx].component.ref for idx in selected_indexes if 0 <= idx < len(self.components)]
-        refs = normalize_session_refs(refs)
-        if not refs:
-            QtWidgets.QMessageBox.warning(self, "Create Session", "No valid component references selected.")
+        group_keys = self.group_keys_for_selected_indexes(selected_indexes)
+        if not group_keys:
+            QtWidgets.QMessageBox.warning(self, "Create Group", "No valid component references selected.")
             return
 
-        self.project_state.sessions[session_name] = refs
-        self.project_state.active_session = session_name
+        self.project_state.groups[group_name] = group_keys
+        self.project_state.active_group = group_name
         self.refresh_project_ui()
         if self.manifest_path is not None:
             self.save_project()
         self.log_message(
-            f"Saved session '{session_name}' with {len(refs)} component(s).",
+            f"Saved group '{group_name}' with {len(group_keys)} component(s).",
             "#86efac",
         )
 
-    def select_active_session(self) -> None:
-        session_name = normalize_session_name(self.session_combo.currentText())
-        if not session_name:
+    def select_active_group(self) -> None:
+        group_name = normalize_group_name(self.group_combo.currentText())
+        if not group_name:
             return
-        indexes = self.component_indexes_for_refs(self.session_refs_for_name(session_name))
+        indexes = self.component_indexes_for_group_keys(self.group_refs_for_name(group_name))
         if not indexes:
             QtWidgets.QMessageBox.warning(
                 self,
-                "Select Session",
-                f"No components from session '{session_name}' exist in the current POS view.",
+                "Select Group",
+                f"No components from group '{group_name}' exist in the current POS view.",
             )
             return
-        self.project_state.active_session = session_name
+        self.project_state.active_group = group_name
         self.set_selected_indexes(set(indexes), scroll_to_first=True)
         self.log_message(
-            f"Selected session '{session_name}' ({len(indexes)} component(s)).",
+            f"Selected group '{group_name}' ({len(indexes)} component(s)).",
             "#94a3b8",
         )
 
-    def delete_active_session(self) -> None:
-        session_name = normalize_session_name(self.session_combo.currentText())
-        if not session_name:
+    def delete_active_group(self) -> None:
+        group_name = normalize_group_name(self.group_combo.currentText())
+        if not group_name:
             return
         answer = QtWidgets.QMessageBox.question(
             self,
-            "Delete Session",
-            f"Delete session '{session_name}'?",
+            "Delete Group",
+            f"Delete group '{group_name}'?",
             QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
             QtWidgets.QMessageBox.No,
         )
         if answer != QtWidgets.QMessageBox.Yes:
             return
-        self.project_state.sessions.pop(session_name, None)
-        if self.project_state.active_session == session_name:
-            self.project_state.active_session = ""
+        self.project_state.groups.pop(group_name, None)
+        if self.project_state.active_group == group_name:
+            self.project_state.active_group = ""
         self.refresh_project_ui()
         if self.manifest_path is not None:
             self.save_project()
-        self.log_message(f"Deleted session '{session_name}'.", "#fca5a5")
+        self.log_message(f"Deleted group '{group_name}'.", "#fca5a5")
 
     def select_generic_file(self, field: PathField, title: str, filter_text: str) -> None:
         start_dir = str(Path(field.text()).parent) if field.text() else str(REPO_ROOT)
@@ -2292,6 +2687,49 @@ class AssemblyProjectWindow(viewer_mod.PosViewerQtWindow):
         self.set_neoden_project_csv(csv_path, primary=True)
         self.save_project()
 
+    def import_machine_feedback_neoden_dialog(self) -> None:
+        start_dir = (
+            str((self.project_dir / "machine_feedback").resolve())
+            if self.project_dir is not None
+            else str(Path.cwd())
+        )
+        path_str, _ = QtWidgets.QFileDialog.getOpenFileName(
+            self,
+            "Import Machine Feedback NeoDen CSV",
+            start_dir,
+            "CSV files (*.csv);;All files (*.*)",
+        )
+        if not path_str:
+            return
+
+        source_path = Path(path_str).resolve()
+        if self.manifest_path is None:
+            if not self.project_name_edit.text().strip():
+                self.project_name_edit.setText(source_path.stem)
+            if not self.board_name_edit.text().strip():
+                self.board_name_edit.setText(source_path.stem)
+            parent_dir = self.choose_project_parent_dir("Select Parent Folder For NeoDen-Based Project")
+            if parent_dir is None:
+                return
+            self.project_state = self.collect_project_state()
+            if not self.prepare_project_directory(parent_dir):
+                return
+            self.ensure_local_feeder_assignment_file()
+
+        self.ensure_project_dirs()
+        target_path = source_path
+        if self.project_dir is not None:
+            feedback_dir = (self.project_dir / "machine_feedback").resolve()
+            feedback_dir.mkdir(parents=True, exist_ok=True)
+            target_path = (feedback_dir / source_path.name).resolve()
+            if source_path != target_path:
+                shutil.copy2(source_path, target_path)
+
+        self.project_state.latest_feedback_neoden_csv = str(target_path)
+        self.set_neoden_project_csv(target_path, primary=True)
+        self.save_project()
+        self.log_message(f"Imported machine feedback NeoDen CSV: {target_path}", "#86efac")
+
     def set_project_pos(self, path: Path, load_into_viewer: bool) -> None:
         resolved = path.resolve()
         self.project_state.pos_file = str(resolved)
@@ -2329,6 +2767,13 @@ class AssemblyProjectWindow(viewer_mod.PosViewerQtWindow):
     def set_neoden_project_csv(self, path: Path, primary: bool) -> None:
         resolved = path.resolve()
         self.project_state.neoden_project_csv = str(resolved)
+        if self.project_dir is not None:
+            feedback_dir = (self.project_dir / "machine_feedback").resolve()
+            try:
+                resolved.relative_to(feedback_dir)
+                self.project_state.latest_feedback_neoden_csv = str(resolved)
+            except ValueError:
+                pass
         self.project_state.entry_mode = "neoden_project" if primary else self.project_state.entry_mode
         if not self.project_state.board_name:
             self.project_state.board_name = resolved.stem
@@ -2366,6 +2811,131 @@ class AssemblyProjectWindow(viewer_mod.PosViewerQtWindow):
             return
         self.feeder_editor_tab.set_neoden_project_path(None)
         self.neoden_tab.clear()
+
+    def sync_feeders_from_latest_feedback(self) -> None:
+        feedback_path = self.latest_machine_feedback_neoden_path()
+        if feedback_path is None or not feedback_path.exists():
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Sync Feeders",
+                "No machine feedback NeoDen CSV is available. Import one first.",
+            )
+            return
+        if self.project_dir is None:
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Sync Feeders",
+                "Open or create a project first so there is a local feeder assignment file to update.",
+            )
+            return
+        target = self.ensure_local_feeder_assignment_file()
+        if target is None:
+            return
+        try:
+            existing_rows = load_feeder_assignment_rows(target)
+            stack_rows = parse_stack_rows_from_neoden_project(feedback_path)
+        except OSError as exc:
+            QtWidgets.QMessageBox.critical(
+                self,
+                "Sync Feeders",
+                f"Failed to read machine feedback NeoDen CSV:\n{feedback_path}\n\n{exc}",
+            )
+            return
+        if not stack_rows:
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Sync Feeders",
+                f"No stack rows were found in:\n{feedback_path}",
+            )
+            return
+        merged_rows = merge_feeder_rows(existing_rows, stack_rows)
+        try:
+            write_feeder_assignment_rows(target, merged_rows)
+        except OSError as exc:
+            QtWidgets.QMessageBox.critical(
+                self,
+                "Sync Feeders",
+                f"Failed to write feeder assignments:\n{target}\n\n{exc}",
+            )
+            return
+        self.project_state.feeder_assignment_file = str(target)
+        self.project_state.latest_feedback_neoden_csv = str(feedback_path)
+        self.refresh_project_ui()
+        if self.manifest_path is not None:
+            self.save_project()
+        self.log_message(
+            f"Synchronized local feeder assignments from machine feedback: {feedback_path}",
+            "#86efac",
+        )
+
+    def prune_loaded_neoden_to_active_group(self) -> None:
+        group_name = normalize_group_name(self.project_state.active_group or self.group_combo.currentText())
+        if not group_name:
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Prune NeoDen",
+                "Select an active group first.",
+            )
+            return
+        group_keys = self.group_refs_for_name(group_name)
+        if not group_keys:
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Prune NeoDen",
+                f"Group '{group_name}' is empty or does not exist.",
+            )
+            return
+        neoden_path = Path(self.project_state.neoden_project_csv) if self.project_state.neoden_project_csv else None
+        data = self.neoden_tab.current_data
+        if neoden_path is None or data is None or not neoden_path.exists():
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Prune NeoDen",
+                "Load a NeoDen project CSV first.",
+            )
+            return
+        keep_keys = set(group_keys)
+        occurrence_counts: Counter[str] = Counter()
+        keep_row_indexes: set[int] = set()
+        kept_count = 0
+        for component in data.components:
+            occurrence_counts[component.name] += 1
+            key = occurrence_key(component.name, occurrence_counts[component.name])
+            if key in keep_keys or component.name in keep_keys:
+                keep_row_indexes.add(component.row_index)
+                kept_count += 1
+        removed_count = len(data.components) - kept_count
+        answer = QtWidgets.QMessageBox.question(
+            self,
+            "Prune NeoDen",
+            f"Keep {kept_count} component row(s) from group '{group_name}' and remove {removed_count} other component row(s)?\n\n"
+            f"This rewrites:\n{neoden_path}",
+            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+            QtWidgets.QMessageBox.No,
+        )
+        if answer != QtWidgets.QMessageBox.Yes:
+            return
+        data.rows = [
+            row
+            for row_index, row in enumerate(data.rows)
+            if row_index in keep_row_indexes or not row or row[0].strip() != "comp"
+        ]
+        try:
+            with neoden_path.open("w", newline="") as handle:
+                writer = csv.writer(handle, lineterminator="\n")
+                writer.writerows(data.rows)
+        except OSError as exc:
+            QtWidgets.QMessageBox.critical(
+                self,
+                "Prune NeoDen",
+                f"Failed to rewrite NeoDen project CSV:\n{neoden_path}\n\n{exc}",
+            )
+            return
+        self.neoden_tab.load_file(neoden_path)
+        self.log_message(
+            f"Pruned NeoDen project to group '{group_name}': kept {kept_count}, removed {removed_count}.",
+            "#86efac",
+        )
 
     def auto_assign_neoden_from_feeder_editor(self) -> None:
         feeder_rows = self.feeder_editor_tab.current_rows
@@ -2481,66 +3051,65 @@ class AssemblyProjectWindow(viewer_mod.PosViewerQtWindow):
 
         menu = QtWidgets.QMenu(self)
         if self.selected_indexes:
-            create_session_action = menu.addAction("Create Session From Selection...")
+            create_group_action = menu.addAction("Create Group From Selection...")
             menu.addSeparator()
         else:
-            create_session_action = None
+            create_group_action = None
 
         generate_full_action = menu.addAction("Generate Full Project CSV")
-
-        if self.project_state.sessions:
-            select_menu = menu.addMenu("Select Session")
-            session_actions: dict[QtGui.QAction, str] = {}
-            for name in sorted(self.project_state.sessions):
+        if self.project_state.groups:
+            select_menu = menu.addMenu("Select Group")
+            group_actions: dict[QtGui.QAction, str] = {}
+            for name in sorted(self.project_state.groups):
                 action = select_menu.addAction(name)
-                session_actions[action] = name
-
-            generate_session_menu = menu.addMenu("Generate Session")
-            generate_session_actions: dict[QtGui.QAction, str] = {}
-            for name in sorted(self.project_state.sessions):
-                action = generate_session_menu.addAction(name)
-                generate_session_actions[action] = name
+                group_actions[action] = name
         else:
-            session_actions = {}
-            generate_session_actions = {}
+            group_actions = {}
 
         chosen = menu.exec(global_pos)
         if chosen is None:
             return
-        if create_session_action is not None and chosen == create_session_action:
-            self.create_session_from_selection()
+        if create_group_action is not None and chosen == create_group_action:
+            self.create_group_from_selection()
             return
         if chosen == generate_full_action:
             self.generate_project_csv()
             return
-        if chosen in session_actions:
-            self.project_state.active_session = session_actions[chosen]
+        if chosen in group_actions:
+            self.project_state.active_group = group_actions[chosen]
             self.refresh_project_ui()
-            self.select_active_session()
+            self.select_active_group()
             return
-        if chosen in generate_session_actions:
-            self.generate_project_csv(session_name=generate_session_actions[chosen])
 
-    def default_generated_output_path(self, session_name: str | None = None) -> Path:
-        session_suffix = ""
-        if session_name:
-            session_suffix = f"__session_{sanitize_folder_name(session_name)}"
+    def show_table_context_menu(self, pos: QtCore.QPoint) -> None:
+        index = self.table.indexAt(pos)
+        if index.isValid() and not self.table.selectionModel().isRowSelected(index.row(), index.parent()):
+            self.table.clearSelection()
+            self.table.selectRow(index.row())
+        if not self.selected_component_indexes_from_table():
+            return
+        menu = QtWidgets.QMenu(self)
+        create_group_action = menu.addAction("Create Group From Selection...")
+        delete_action = menu.addAction("Delete Selected")
+        chosen = menu.exec(self.table.viewport().mapToGlobal(pos))
+        if chosen == create_group_action:
+            self.create_group_from_selection()
+        elif chosen == delete_action:
+            self.delete_selected_components()
+
+    def default_generated_output_path(self) -> Path:
         if self.project_dir is not None:
             generated_dir = self.project_dir / "generated"
             generated_dir.mkdir(parents=True, exist_ok=True)
             if self.project_state.pos_file:
-                return generated_dir / f"{Path(self.project_state.pos_file).stem}{session_suffix}_neoden_project.csv"
-            return generated_dir / f"generated{session_suffix}_neoden_project.csv"
+                return generated_dir / f"{Path(self.project_state.pos_file).stem}_neoden_project.csv"
+            return generated_dir / "generated_neoden_project.csv"
         if self.project_state.pos_file:
             pos_path = Path(self.project_state.pos_file)
-            return pos_path.with_name(f"{pos_path.stem}{session_suffix}_neoden_project.csv")
-        return Path.cwd() / f"generated{session_suffix}_neoden_project.csv"
+            return pos_path.with_name(f"{pos_path.stem}_neoden_project.csv")
+        return Path.cwd() / "generated_neoden_project.csv"
 
-    def generate_project_csv(
-        self,
-        checked: bool = False,
-        session_name: str | None = None,
-    ) -> None:
+    def generate_project_csv(self, checked: bool = False) -> None:
         del checked
         self.project_state = self.collect_project_state()
         pos_path = Path(self.project_state.pos_file) if self.project_state.pos_file else None
@@ -2611,70 +3180,12 @@ class AssemblyProjectWindow(viewer_mod.PosViewerQtWindow):
             QtWidgets.QMessageBox.critical(self, "Generation Error", str(exc))
             return
 
-        selected_session_name = normalize_session_name(session_name or "")
-        session_refs: list[str] = []
-        if selected_session_name:
-            session_refs = self.session_refs_for_name(selected_session_name)
-            if not session_refs:
-                QtWidgets.QMessageBox.warning(
-                    self,
-                    "Generate Session",
-                    f"Session '{selected_session_name}' does not exist or is empty.",
-                )
-                return
-            session_ref_set = set(session_refs)
-            filtered_pos_lines: list[list[str]] = []
-            if anchor_line is not None:
-                filtered_pos_lines.append(list(anchor_line))
-            matched_session_refs: set[str] = set()
-            for line in pos_lines:
-                if line is anchor_line:
-                    continue
-                if not line or line[0].startswith("#") or len(line) < 6:
-                    continue
-                if line[0] in session_ref_set:
-                    matched_session_refs.add(line[0])
-                    filtered_pos_lines.append(line)
-            if not matched_session_refs and (anchor_line is None or anchor_line[0] not in session_ref_set):
-                QtWidgets.QMessageBox.warning(
-                    self,
-                    "Generate Session",
-                    f"None of the refs in session '{selected_session_name}' are present in the current POS data.",
-                )
-                return
-            neoden_project, missing, coord_map = converter_mod.process_pos_lines(
-                filtered_pos_lines,
-                header_lines,
-                maps,
-                defaults,
-                (csv_by_fp_val, csv_by_fp),
-                self.side_combo.currentText(),
-                global_offset,
-            )
-            generated_refs = {
-                line[0]
-                for line in filtered_pos_lines
-                if line and not line[0].startswith("#") and len(line) >= 6
-            }
-            missing_session_refs = [ref for ref in session_refs if ref not in generated_refs]
-            if missing_session_refs:
-                self.log_message(
-                    f"Session '{selected_session_name}' skipped {len(missing_session_refs)} ref(s) not present in the current POS data/side filter.",
-                    "#fca5a5",
-                )
-
-        output_path = self.default_generated_output_path(selected_session_name or None).resolve()
+        output_path = self.default_generated_output_path().resolve()
         output_path.write_text(neoden_project)
         self.project_state.neoden_project_csv = str(output_path)
-        if selected_session_name:
-            self.project_state.active_session = selected_session_name
         self.output_label.setText(str(output_path))
         self.log_message(
-            (
-                f"Generated session NeoDen project CSV ({selected_session_name}): {output_path}"
-                if selected_session_name
-                else f"Generated NeoDen project CSV: {output_path}"
-            ),
+            f"Generated NeoDen project CSV: {output_path}",
             "#86efac",
         )
         self.log_message(

@@ -7,6 +7,7 @@ import argparse
 import os
 from pathlib import Path
 import csv
+import io
 import json
 
 
@@ -109,7 +110,7 @@ def build_feeder_maps(comp_lines):
     for line in comp_lines:
         if not line.startswith("comp,"):
             continue
-        parts = line.split(",")
+        parts = next(csv.reader([line]))
         if len(parts) < 10:
             continue
         _, feeder_id, nozzle, name, value, footprint, _, _, _, skip, *_ = parts
@@ -207,10 +208,28 @@ def choose_feeder(name, value, footprint, maps, defaults, csv_maps):
     return defaults
 
 
+def _csv_line(fields):
+    buffer = io.StringIO()
+    csv.writer(buffer, lineterminator="").writerow(fields)
+    return buffer.getvalue()
+
+
 def format_comp_line(name, value, footprint, x, y, rotation, feeder_id, nozzle, skip):
-    return (
-        "comp,{},{},{},{},{},{:.2f},{:.2f},{:.2f},{},"
-    ).format(feeder_id, nozzle, name, value, footprint, x, y, rotation, skip)
+    return _csv_line(
+        [
+            "comp",
+            feeder_id,
+            nozzle,
+            name,
+            value,
+            footprint,
+            "{:.2f}".format(x),
+            "{:.2f}".format(y),
+            "{:.2f}".format(rotation),
+            skip,
+            "",
+        ]
+    )
 
 
 def process_pos_lines(
@@ -293,7 +312,7 @@ def build_stack_line(row):
     if extra:
         entry.extend(extra.split("|"))
     entry.append("")
-    return ",".join(entry)
+    return _csv_line(entry)
 
 
 def apply_feeder_csv_to_header(header_lines, stack_rows):

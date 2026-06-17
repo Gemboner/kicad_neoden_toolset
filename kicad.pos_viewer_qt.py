@@ -284,7 +284,7 @@ class ViewerScene(QtWidgets.QGraphicsScene):
 
 
 class ViewerView(QtWidgets.QGraphicsView):
-    componentClicked = QtCore.Signal(int)
+    componentClicked = QtCore.Signal(int, bool)
     originPicked = QtCore.Signal(float, float)
     hoverComponentChanged = QtCore.Signal(object)
     selectionRectSelected = QtCore.Signal(object, bool)
@@ -344,7 +344,10 @@ class ViewerView(QtWidgets.QGraphicsView):
                 return
             idx = self.window.find_component_near_scene(scene_pos, self.pick_radius_world())
             if idx is not None:
-                self.componentClicked.emit(idx)
+                additive = bool(
+                    event.modifiers() & (QtCore.Qt.ControlModifier | QtCore.Qt.ShiftModifier)
+                )
+                self.componentClicked.emit(idx, additive)
                 event.accept()
                 return
             self._selection_active = True
@@ -612,6 +615,7 @@ class PosViewerQtWindow(QtWidgets.QMainWindow):
         self.body_scale = 0.28
         self.pick_pos_origin_mode = False
         self.side_filter = side
+        self._syncing_table_selection = False
 
         self._build_ui()
         self._connect_signals()
@@ -1194,20 +1198,25 @@ class PosViewerQtWindow(QtWidgets.QMainWindow):
         selection_model = self.table.selectionModel()
         if selection_model is None:
             return
-        self.table.blockSignals(True)
-        selection_model.clearSelection()
-        first_item: QtWidgets.QTableWidgetItem | None = None
-        for row, component_index in enumerate(self.visible_component_indexes):
-            if component_index not in self.selected_indexes:
-                continue
-            model_index = self.table.model().index(row, 0)
-            selection_model.select(
-                model_index,
-                QtCore.QItemSelectionModel.Select | QtCore.QItemSelectionModel.Rows,
-            )
-            if first_item is None:
-                first_item = self.table.item(row, 0)
-        self.table.blockSignals(False)
+        self._syncing_table_selection = True
+        try:
+            blocker_table = QtCore.QSignalBlocker(self.table)
+            blocker_selection = QtCore.QSignalBlocker(selection_model)
+            selection_model.clearSelection()
+            first_item: QtWidgets.QTableWidgetItem | None = None
+            for row, component_index in enumerate(self.visible_component_indexes):
+                if component_index not in self.selected_indexes:
+                    continue
+                model_index = self.table.model().index(row, 0)
+                selection_model.select(
+                    model_index,
+                    QtCore.QItemSelectionModel.Select | QtCore.QItemSelectionModel.Rows,
+                )
+                if first_item is None:
+                    first_item = self.table.item(row, 0)
+            del blocker_table, blocker_selection
+        finally:
+            self._syncing_table_selection = False
         if scroll_to_first and first_item is not None:
             self.table.scrollToItem(first_item)
 
@@ -1220,6 +1229,8 @@ class PosViewerQtWindow(QtWidgets.QMainWindow):
         return sorted(set(indexes))
 
     def on_table_selection_changed(self) -> None:
+        if self._syncing_table_selection:
+            return
         self.selected_indexes = set(self.selected_component_indexes_from_table())
         self.update_selection_label()
         self.component_layer.update()
@@ -1264,7 +1275,15 @@ class PosViewerQtWindow(QtWidgets.QMainWindow):
     def clear_component_selection(self) -> None:
         self.set_selected_indexes(set())
 
-    def select_component_index(self, idx: int) -> None:
+    def select_component_index(self, idx: int, additive: bool = False) -> None:
+        if additive:
+            selected = set(self.selected_indexes)
+            if idx in selected:
+                selected.remove(idx)
+            else:
+                selected.add(idx)
+            self.set_selected_indexes(selected, scroll_to_first=idx in selected)
+            return
         self.set_selected_indexes({idx}, scroll_to_first=True)
 
     def component_scene_rect(self, view: ViewComponent) -> QtCore.QRectF:
